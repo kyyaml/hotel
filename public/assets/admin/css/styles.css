@@ -10601,6 +10601,7 @@ fieldset:disabled .btn {
     max-width: 100% !important
 }
 
+
 .vw-100 {
     width: 100vw !important
 }
@@ -10608,6 +10609,8 @@ fieldset:disabled .btn {
 .min-vw-100 {
     min-width: 100vw !important
 }
+
+
 
 .h-25 {
     height: 25% !important

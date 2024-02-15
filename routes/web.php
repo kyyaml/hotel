@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\MemberEkstraController;
 use App\Http\Controllers\Admin\PelatihController;
 use App\Http\Controllers\Admin\PertemuanController;
 use App\Http\Controllers\Admin\SiswaController;
+use App\Http\Controllers\User\PresensiController;
+use App\Http\Controllers\User\UserController;
 use App\Models\MemberEkstra;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +23,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//user
+Route::get('/', [UserController::class, 'index'])->name('user.index');
+
+Route::middleware(['guest'])->group(function () {
+    //Login User
+    Route::post('/login', [UserController::class, 'login'])->name('user.login');  
+});
+
+Route::middleware(['isSiswa'])->group(function () {
+    Route::resource('presensi', PresensiController::class);
+    Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
+});
+
+
+//admin
 Route::prefix('admin')->group(function () {
 
     // Authentication
