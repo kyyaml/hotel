@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,11 +18,21 @@ class Pertemuan extends Model
         'id_pertemuan',
         'judul_pertemuan',
         'kegiatan',
-        'id_ekstra',
-        'tgl_pertemuan'
+        'start_time',
+        'end_time',
+        'id_ekstra'
     ];
 
-    protected $dates = ['tgl_pertemuan'];
+    protected $dates = ['start_time', 'end_time'];
+
+    public function formatTime()
+    {
+        return [
+            'start_time' => Carbon::parse($this->start_time)->format('H:i'),
+            'end_time' => Carbon::parse($this->end_time)->format('H:i')
+        ];
+    }
+
 
     public function ekstrakurikuler()
     {

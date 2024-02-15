@@ -23,6 +23,17 @@ class PelatihController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+    public function searchPelatih(Request $request){
+        $query = $request->input('searchPelatih');
+
+        $pelatih = Pelatih::where('nama', 'like', "%$query%")
+        ->whereNotIn('role', ['kesiswaan'])
+        ->get();
+
+        return view('Admin.Pelatih.index', ['pelatih'=>$pelatih]);
+    }
+
     public function create()
     {
         return view('Admin.Pelatih.create');
@@ -37,8 +48,8 @@ class PelatihController extends Controller
 
         $validate = Validator::make($data, [
             'nama' =>'required',
-            'username' => 'required','unique:pelatih',
-            'password' => 'required',
+            'username' => 'required|unique:pelatih|min:5',
+            'password' => 'required|min:6',
             'jenis_pelatih' => 'required'
         ]);
 
@@ -90,9 +101,22 @@ class PelatihController extends Controller
      */
     public function update(Request $request, $id_pelatih)
     {
-        $data = $request->all();
 
         $pelatih = Pelatih::find($id_pelatih);
+
+        $data = $request->all();
+
+        $validate = Validator::make($data, [
+            'nama' =>'required',
+            'username' => 'required|string|unique:pelatih,username,' . $id_pelatih . ',id_pelatih',
+            'password' => 'required|min:6',
+            'jenis_pelatih' => 'required'
+        ]);
+
+        if ($validate->fails()) {
+            return redirect()->back()->withInput()->withErrors($validate);
+        }
+
 
         $pelatih->update([
             'nama' => $data['nama'],

@@ -15,42 +15,45 @@
                         <h5 class="card-title fw-semibold mb-4">Tambah Siswa</h5>
                         <div class="card">
                             <div class="card-body">
-                                @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
 
                                 <form action="{{ route('siswa.store') }}" method="POST">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">NIS</label>
-                                        <input type="text" name='nis' class="form-control" id="exampleInputEmail1"
-                                            aria-describedby="emailHelp">
+                                        <input type="text" name='nis' value="{{ old('nis') }}"
+                                            class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        @error('nis')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Nama</label>
-                                        <input type="text" name='nama' class="form-control" id="exampleInputEmail1"
-                                            aria-describedby="emailHelp">
+                                        <input type="text" name='nama' value="{{ old('nama') }}"
+                                            class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        @error('nama')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Username</label>
-                                        <input type="text" name="username" class="form-control" id="exampleInputEmail1"
-                                            aria-describedby="emailHelp">
+                                        <input type="text" name="username" value="{{ old('username') }}"
+                                            class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        @error('username')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
-
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Password</label>
                                         <div class="input-group">
-                                            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-                                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                            <input type="password" name="password" class="form-control"
+                                                id="exampleInputPassword1">
+                                            <button class="btn btn-outline-primary" type="button" id="togglePassword">
                                                 <i class="bi bi-eye"></i>
                                             </button>
                                         </div>
+                                        @error('password')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>

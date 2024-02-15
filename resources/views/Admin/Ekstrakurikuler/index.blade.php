@@ -5,18 +5,19 @@
 
 @section('header')
     <a href="#" class="nav-link fs-4 d-none d-lg-block">Data Ekstrakurikuler</a>
-@endsection 
+@endsection
 
 @section('content')
     <div class="container-fluid">
         <a href="{{ route('ekstrakurikuler.create') }}" class="btn btn-primary mb-3">Tambah Ekstrakurikuler</a>
         <div class="row">
             <div class="col-12 col-lg-4 col-md-5 ">
-                <form action="#" method="GET">
+                <form action="{{ route('ekstrakurikuler.search') }}" method="GET">
                     <div class="input-group mb-3">
-                        <input type="search" name="query" placeholder="cari nama ekstra..." id="form1" class="form-control"/>
-                        <button type="submit" class="btn btn-primary">Cari</button>
-                      </div>
+                        <input type="search" name="searchEkstra" placeholder="cari nama ekstra..." id="form1"
+                            class="form-control bg-white" />
+                            <button type="submit" class="btn btn-primary"><i class="ti ti-search"></i></button>                      </div>
+                        </div>
                 </form>
             </div>
         </div>
@@ -44,22 +45,34 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($ekstrakurikuler as $k => $v)
+                                    @if (count($ekstrakurikuler) > 0)
+                                        @foreach ($ekstrakurikuler as $k => $v)
+                                            <tr>
+                                                <td class="border-bottom-0">
+                                                    <p class="mb-0 fw-normal">{{ $k += 1 }}</p>
+                                                </td>
+                                                <td class="border-bottom-0">
+                                                    <p class="mb-0 fw-normal">{{ $v->nama }}</p>
+                                                </td>
+                                                <td class="border-bottom-0">
+                                                    <p class="mb-0 fw-normal">{{ $v->pelatih->nama }}</p>
+                                                </td>
+                                                <td class="border-bottom-0">
+                                                    <a href="{{ route('ekstrakurikuler.edit', $v->id_ekstra) }}"
+                                                        class="text-muted"><u>
+                                                            <p class="mb-0 fw-normal ">Lihat</p>
+                                                        </u></a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
                                         <tr>
-                                            <td class="border-bottom-0">
-                                                <p class="mb-0 fw-normal">{{ $k += 1 }}</p>
+                                            <td colspan="5" class="text-center">
+                                                <p class="mb-0 fw-normal ">Tidak Ada Data</p>
                                             </td>
-                                            <td class="border-bottom-0">
-                                                <p class="mb-0 fw-normal">{{ $v->nama }}</p>
-                                            </td>
-                                            <td class="border-bottom-0">
-                                                <p class="mb-0 fw-normal">{{ $v->pelatih->nama }}</p>
-                                            </td>
-                                            <td class="border-bottom-0">
-                                                <a href="{{ route('ekstrakurikuler.edit', $v->id_ekstra) }}" class="text-muted"><u><p class="mb-0 fw-normal ">Lihat</p></u></a>                           
-                                            </td>
-                                        </tr>   
-                                    @endforeach
+                                        </tr>
+                                    @endif
+
                                 </tbody>
                             </table>
                         </div>

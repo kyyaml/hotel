@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pertemuan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -17,7 +18,7 @@ class PertemuanController extends Controller
     {
         $pertemuan = Pertemuan::latest()->get();
 
-        return view('Admin.Pertemuan.index', ['pertemuan'=>$pertemuan]);
+        return view('Admin.Pertemuan.index', ['pertemuan' => $pertemuan]);
     }
 
     /**
@@ -25,7 +26,7 @@ class PertemuanController extends Controller
      */
     public function create()
     {
-       return view('Admin.Pertemuan.create');
+        return view('Admin.Pertemuan.create');
     }
 
     /**
@@ -35,22 +36,35 @@ class PertemuanController extends Controller
     {
         $data = $request->all();
 
+       
+
         $validate = Validator::make($data, [
             'judul_pertemuan' => 'required',
             'kegiatan' => 'required',
-            'tgl_pertemuan' => 'required|date',          
+            'start_time' => 'required|date_format:H:i|before:end_time',
+            'end_time' => 'required|date_format:H:i',
+        ], [
+            'start_time.date_format' => 'Gunakan format 24 jam (HH:MM) untuk absen mulai',
+            'end_time.date_format' => 'Gunakan format 24 jam (HH:MM) untuk absen selesai',
+            'start_time.before' => 'absen mulai harus lebih awal dari absen selesai',
         ]);
+
 
         if ($validate->fails()) {
             return redirect()->back()->withInput()->withErrors($validate);
         }
+
+
+        $start_time = Carbon::parse($request->input('start_time'))->format('H:i');
+        $end_time = Carbon::parse($request->input('end_time'))->format('H:i');
 
         $id_ekstra = Auth::guard('admin')->user()->ekstrakurikuler->id_ekstra;
 
         $pertemuan = Pertemuan::create([
             'judul_pertemuan' => $data['judul_pertemuan'],
             'kegiatan' => $data['kegiatan'],
-            'tgl_pertemuan' => date_create($data['tgl_pertemuan'])->format('Y-m-d'),
+            'start_time' => $start_time,
+            'end_time' => $end_time,
             'id_ekstra' => $id_ekstra,
         ]);
 
@@ -59,7 +73,6 @@ class PertemuanController extends Controller
         } else {
             return redirect()->back()->with(['pertemuan' => 'Gagal terkirim!', 'type' => 'danger']);
         }
-
     }
 
     /**
@@ -75,9 +88,9 @@ class PertemuanController extends Controller
      */
     public function edit($id_pertemuan)
     {
-        $pertemuan = Pertemuan::where('id_pertemuan',$id_pertemuan)->first();
+        $pertemuan = Pertemuan::where('id_pertemuan', $id_pertemuan)->first();
 
-        return view('Admin.Pertemuan.edit', ['pertemuan'=>$pertemuan]);
+        return view('Admin.Pertemuan.edit', ['pertemuan' => $pertemuan]);
     }
 
     /**
@@ -85,14 +98,35 @@ class PertemuanController extends Controller
      */
     public function update(Request $request, $id_pertemuan)
     {
-        $pertemuan=Pertemuan::find($id_pertemuan);
+        $pertemuan = Pertemuan::find($id_pertemuan);
 
-        $data=$request->all();
+        $data = $request->all();
+
+        $validate = Validator::make($data, [
+            'judul_pertemuan' => 'required',
+            'kegiatan' => 'required',
+            'start_time' => 'required|date_format:H:i|before:end_time',
+            'end_time' => 'required|date_format:H:i',
+        ], [
+            'start_time.date_format' => 'Gunakan format 24 jam (HH:MM) untuk absen mulai',
+            'end_time.date_format' => 'Gunakan format 24 jam (HH:MM) untuk absen selesai',
+            'start_time.before' => 'absen mulai harus lebih awal dari absen selesai',
+        ]);
+
+        if ($validate->fails()) {
+            return redirect()->back()->withInput()->withErrors($validate);
+        }
+
+
+        $start_time = Carbon::parse($data['start_time'])->toTimeString();
+
+        $end_time = Carbon::parse($data['end_time'])->toTimeString();
 
         $pertemuan->update([
             'judul_pertemuan' => $data['judul_pertemuan'],
             'kegiatan' => $data['kegiatan'],
-            'tgl_pertemuan' => date_create($data['tgl_pertemuan'])->format('Y-m-d'),
+            'start_time' => $start_time,
+            'end_time' => $end_time,
         ]);
 
         return redirect()->route('pertemuan.index');
@@ -107,6 +141,6 @@ class PertemuanController extends Controller
 
         $pertemuan->delete();
 
-        return redirect()->route('pertemuan.index') ;
+        return redirect()->route('pertemuan.index');
     }
 }

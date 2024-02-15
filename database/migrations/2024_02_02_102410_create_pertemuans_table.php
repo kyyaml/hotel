@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('id_pertemuan');
             $table->string('judul_pertemuan');
             $table->string('kegiatan');
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->time('start_time')->format('H:i');
+            $table->time('end_time')->format('H:i');
             $table->unsignedBigInteger('id_ekstra');
             $table->timestamps();
 

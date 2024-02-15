@@ -11,11 +11,11 @@
         <div class="row">
             <div class="col-12 col-lg-4  col-md-5 ">
                 <div class="mb-3">
-                        <div class="input-group">
-                            <input type="text" name="searchSiswa" id="searchSiswa" class="form-control"
-                                placeholder="Cari Nama Siswa...">
-                            <button type="button" class="btn btn-primary"><i class="ti ti-search"></i></button>
-                        </div>
+                    <div class="input-group">
+                        <input type="text" name="searchSiswa" id="searchSiswa" class="form-control bg-white"
+                            placeholder="Cari Nama Siswa...">
+                        <button type="button" class="btn btn-primary"><i class="ti ti-search"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
                                                     <p class="mb-0 fw-normal">{{ $v->username }}</p>
                                                 </td>
                                                 <td class="border-bottom-0">
-                                                    <a href="{{ route('siswa.edit',$v->nis) }}" class="text-muted">
+                                                    <a href="{{ route('siswa.edit', $v->nis) }}" class="text-muted">
                                                         <u>
                                                             <p class="mb-0 fw-normal">Lihat</p>
                                                         </u>
@@ -74,9 +74,11 @@
                                             </tr>
                                         @endforeach
                                     @else
-                                        <tr>
-                                            <td colspan="5" class="text-center">Tidak Ada Data</td>
-                                        </tr>
+                                    <tr>
+                                        <td colspan="5" class="text-center">
+                                            <p class="mb-0 fw-normal ">Tidak Ada Data</p>
+                                        </td>
+                                    </tr>
                                     @endif
 
                                 </tbody>

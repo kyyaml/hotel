@@ -15,7 +15,7 @@
                 <form action="#" method="GET">
                     <div class="input-group mb-3">
                         <input type="search" name="query" placeholder="cari nama pertemuan..." id="form1" class="form-control bg-white  "/>
-                        <button type="submit" class="btn btn-primary">Cari</button>
+                        <button type="submit" class="btn btn-primary"><i class="ti ti-search"></i></button>                      </div>
                       </div>
                 </form>
             </div>
@@ -39,7 +39,10 @@
                                             <h6 class="fw-semibold mb-0">Kegiatan</h6>
                                         </th>
                                         <th class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">Tanggal</h6>
+                                            <h6 class="fw-semibold mb-0">Absen Mulai</h6>
+                                        </th>
+                                        <th class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-0">Absen Selesai</h6>
                                         </th>
                                         <th class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">Ekstrakurikuler</h6>
@@ -60,15 +63,18 @@
                                             </td>
                                             <td class="border-bottom-0">
                                                 <p class="mb-0 fw-normal">{{ $v->kegiatan }}</p>
+                                            </td>          
+                                            <td class="border-bottom-0">
+                                                <p class="mb-0 fw-normal">{{ $v->formatTime()['start_time'] }}</p>
                                             </td>
                                             <td class="border-bottom-0">
-                                                <p class="mb-0 fw-normal">{{ date('d-M-Y', strtotime($v->tgl_pertemuan)) }}</p>
+                                                <p class="mb-0 fw-normal">{{ $v->formatTime()['end_time'] }}</p>
                                             </td>
                                             <td class="border-bottom-0">
                                                 <p class="mb-0 fw-normal">{{ $v->ekstrakurikuler->nama }}</p>
                                             </td>
                                             <td class="border-bottom-0">
-                                                <a href="#" class="text-muted"><u><p class="mb-0 fw-normal ">Lihat</p></u></a>                           
+                                                <a href="{{ route('pertemuan.edit', $v->id_pertemuan) }}" class="text-muted"><u><p class="mb-0 fw-normal ">Lihat</p></u></a>                           
                                             </td>
                                         </tr>   
                                     @endforeach

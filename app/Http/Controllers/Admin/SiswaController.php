@@ -48,7 +48,7 @@ class SiswaController extends Controller
         $validate = Validator::make($data,[
             'nis' => 'required|unique:siswa',
             'nama' => 'required',
-            'username' => 'required|unique:siswa',
+            'username' => 'required|unique:siswa|min:5',
             'password' => 'required|min:6',
         ]);
 
@@ -93,6 +93,17 @@ class SiswaController extends Controller
         $data=$request->all();
 
         $siswa=Siswa::find($nis);  
+
+        $validate = Validator::make($data,[
+            'nis' => 'required|unique:siswa,nis,' . $nis. ',nis',
+            'nama' => 'required',
+            'username' => 'required|min:5|unique:siswa,username,' . $nis . ',nis',
+            'password' => 'required|min:6',
+        ]);
+
+        if ($validate->fails()) {
+            return redirect()->back()->withInput()->withErrors($validate);
+        }
 
         $siswa->update([
             'nis' => $data['nis'],

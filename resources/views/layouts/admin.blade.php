@@ -9,7 +9,7 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/admin/images/logos/favicon.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/css/styles.min.css') }}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-</head>
+  </head>
 
 <body class="bg-light">
     <!--  Body Wrapper -->

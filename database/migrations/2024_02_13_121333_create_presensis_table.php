@@ -22,6 +22,8 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('id_pertemuan')->references('id_pertemuan')->on('pertemuan');
+            $table->foreign('nis')->references('nis')->on('siswa');
+
         });
     }
 

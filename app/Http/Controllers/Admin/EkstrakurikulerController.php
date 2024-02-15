@@ -20,6 +20,14 @@ class EkstrakurikulerController extends Controller
         return view('Admin.Ekstrakurikuler.index', ['ekstrakurikuler'=>$ekstrakurikuler]);
     }
 
+    public function searchEkstrakurikuler(Request $request){
+        $query = $request->input('searchEkstra');
+
+        $ekstrakurikuler = Ekstrakurikuler::where('nama', 'like', "%$query%")->get();
+
+        return view('Admin.Ekstrakurikuler.index', ['ekstrakurikuler'=>$ekstrakurikuler]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

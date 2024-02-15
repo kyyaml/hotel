@@ -13,7 +13,7 @@
             <div class="col-12 col-lg-4 col-md-5 ">
                 <form action="{{ route('member-ekstra.searchMember',$ekstrakurikuler->id_ekstra) }}" method="GET">
                   <div class="input-group mb-3">
-                    <input type="search" name="searchMember" placeholder="cari nama siswa..." id="form1" class="form-control"/>
+                    <input type="search" name="searchMember" placeholder="cari nama siswa..." id="form1" class="form-control bg-white"/>
                     <button type="submit" class="btn btn-primary">Cari</button>
                   </div>
                 </form>
