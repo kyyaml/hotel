@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\User\PresensiController;
 use App\Http\Controllers\User\UserController;
 use App\Models\MemberEkstra;
+use App\Models\Presensi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,7 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['isSiswa'])->group(function () {
     Route::resource('presensi', PresensiController::class);
+    Route::get('/presensi/{id_ekstra}/show-absen', [PresensiController::class, 'showAbsen'])->name('show.absen');
     Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
 });
 
@@ -78,6 +80,7 @@ Route::prefix('admin')->group(function () {
         Route::group(['middleware' => ['role:pelatih']], function () {
             // Pertemuan Management
             Route::resource('pertemuan', PertemuanController::class);
+            Route::get('/searchPertemuan', [PertemuanController::class, 'searchPertemuan'])->name('pertemuan.search');
         });
 
         // Logout (accessible to both roles)

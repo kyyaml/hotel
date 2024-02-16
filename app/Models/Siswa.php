@@ -27,9 +27,12 @@ class Siswa  extends Authenticatable
     }
 
     public function ekstrakurikuler()
-{
-    return $this->belongsToMany(Ekstrakurikuler::class, 'member_ekstra', 'nis', 'id_ekstra');
-}
+    {
+        return $this->belongsToMany(Ekstrakurikuler::class, 'member_ekstra', 'nis', 'id_ekstra');
+    }
 
+    public function presensi()
+    {
+        return $this->hasMany(Presensi::class, 'nis', 'nis');
+    }
 }
-

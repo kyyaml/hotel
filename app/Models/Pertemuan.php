@@ -38,4 +38,10 @@ class Pertemuan extends Model
     {
         return $this->belongsTo(Ekstrakurikuler::class, 'id_ekstra');
     }
+
+    public function presensi()
+    {
+        return $this->hasMany(Presensi::class, 'id_pertemuan', 'id_pertemuan');
+    }
+
 }

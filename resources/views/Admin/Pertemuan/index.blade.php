@@ -12,9 +12,9 @@
         <a href="{{ route('pertemuan.create') }}" class="btn btn-primary mb-3">Tambah Pertemuan</a>
         <div class="row">
             <div class="col-12 col-lg-4 col-md-5 ">
-                <form action="#" method="GET">
+                <form action="{{ route('pertemuan.search') }}" method="GET">
                     <div class="input-group mb-3">
-                        <input type="search" name="query" placeholder="cari nama pertemuan..." id="form1"
+                        <input type="search" name="searchPertemuan" placeholder="cari judul atau kegiatan ..." id="form1"
                             class="form-control bg-white  " />
                         <button type="submit" class="btn btn-primary"><i class="ti ti-search"></i></button>
                     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ekstrakurikuler;
 use App\Models\Pertemuan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,10 +17,46 @@ class PertemuanController extends Controller
      */
     public function index()
     {
-        $pertemuan = Pertemuan::latest()->get();
+        $id_pelatih = Auth::guard('admin')->user()->id_pelatih;
+
+        $ekstrakurikuler = Ekstrakurikuler::where('id_pelatih', $id_pelatih)->pluck('id_ekstra');
+
+        $pertemuan = Pertemuan::whereIn('id_ekstra', $ekstrakurikuler)->latest()->get();
 
         return view('Admin.Pertemuan.index', ['pertemuan' => $pertemuan]);
     }
+
+    
+    public function searchPertemuan(Request $request)
+{
+    // Ambil id pelatih yang sedang login
+    $id_pelatih = Auth::guard('admin')->user()->id_pelatih;
+
+    // Ambil ekstrakurikuler yang dilatih oleh pelatih tersebut
+    $ekstrakurikuler = Ekstrakurikuler::where('id_pelatih', $id_pelatih)->pluck('id_ekstra');
+
+    // Query awal pertemuan
+    $query = Pertemuan::whereIn('id_ekstra', $ekstrakurikuler);
+
+    // Cek apakah ada query pencarian
+    if ($request->has('searchPertemuan')) {
+        // Ambil keyword pencarian
+        $keyword = $request->input('searchPertemuan');
+
+        // Jika keyword pencarian tidak kosong, lakukan pencarian
+        if (!empty($keyword)) {
+            // Lakukan pencarian berdasarkan judul atau kegiatan
+            $query->where('judul_pertemuan', 'like', "%$keyword%")
+                ->orWhere('kegiatan', 'like', "%$keyword%");
+        }
+    }
+
+    // Ambil pertemuan yang terkait dengan ekstrakurikuler yang dilatih oleh pelatih tersebut
+    $pertemuan = $query->latest()->get();
+
+    return view('Admin.Pertemuan.index', ['pertemuan' => $pertemuan]);
+}
+
 
     /**
      * Show the form for creating a new resource.
