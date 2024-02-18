@@ -44,7 +44,8 @@ class PresensiController extends Controller
             $end_time = Carbon::parse($pertemuan->end_time);
 
             // Menentukan apakah waktu saat ini berada dalam jangka waktu pertemuan ini
-            $absen = $now->between($start_time, $end_time);
+            $absen = $now->between($start_time, $end_time) && $now->isSameDay($pertemuan->created_at);
+
 
             // Menambahkan status absen ke dalam array
             $statusAbsen[$pertemuan->id_pertemuan] = $absen;

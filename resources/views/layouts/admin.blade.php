@@ -4,25 +4,26 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title')</title>
+    <title>Ekstrakurikuler</title>
     @yield('css')
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/admin/images/logos/favicon.png') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/admin/images/logos/favicons.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/css/styles.min.css') }}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  </head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+</head>
 
 <body class="bg-light">
     <!--  Body Wrapper -->
-    <div  class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
-        <aside class="left-sidebar">  
+        <aside class="left-sidebar">
             <!-- Sidebar scroll-->
             <div>
                 <div class="brand-logo d-flex align-items-center justify-content-between">
                     <a href="#" class="text-nowrap logo-img">
-                        <img src="{{ asset('assets/admin/images/logos/dark-logo.svg') }}" width="180"
-                            alt="" />
+                        <img src="{{ asset('assets/admin/images/logos/mainlogo.png')}}" width="160" alt="">
+
                     </a>
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                         <i class="ti ti-x fs-8"></i>
@@ -50,7 +51,7 @@
                                 <li class="sidebar-item">
                                     <a class="sidebar-link" href="{{ route('pelatih.index') }}" aria-expanded="false">
                                         <span>
-                                            <i class="ti ti-cards"></i>
+                                            <i class="ti ti-command"></i>
                                         </span>
                                         <span class="hide-menu">Pelatih</span>
                                     </a>
@@ -59,7 +60,7 @@
                                     <a class="sidebar-link" href="{{ route('ekstrakurikuler.index') }}"
                                         aria-expanded="false">
                                         <span>
-                                            <i class="ti ti-alert-circle"></i>
+                                            <i class="ti ti-apps-filled"></i>
                                         </span>
                                         <span class="hide-menu">Ekstrakurikuler</span>
                                     </a>
@@ -68,14 +69,13 @@
                                     <a class="sidebar-link" href="{{ route('member-ekstra.index') }}"
                                         aria-expanded="false">
                                         <span>
-                                            <i class="ti ti-alert-circle"></i>
+                                            <i class="ti ti-users-group"></i>
                                         </span>
                                         <span class="hide-menu">Member Ekstrakurikuler</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{ route('siswa.index') }}"
-                                        aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('siswa.index') }}" aria-expanded="false">
                                         <span>
                                             <i class="ti ti-user-circle"></i>
                                         </span>
@@ -83,52 +83,50 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{ route('laporan.index') }}"
-                                        aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('laporan.index') }}" aria-expanded="false">
                                         <span>
-                                            <i class="ti ti-user-circle"></i>
+                                            <i class="ti ti-report-analytics"></i>
                                         </span>
                                         <span class="hide-menu">Laporan</span>
                                     </a>
                                 </li>
                             @else
-                            <li class="sidebar-item">
-                                <a class="sidebar-link" href="{{ route('anggota.index') }}"
-                                    aria-expanded="false">
-                                    <span>
-                                        <i class="ti ti-alert-circle"></i>
-                                    </span>
-                                    <span class="hide-menu">Member Ekstrakurikuler</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-item">
-                              <a class="sidebar-link" href="{{ route('pertemuan.index') }}" aria-expanded="false">
-                                  <span>
-                                      <i class="ti ti-alert-circle"></i>
-                                  </span>
-                                  <span class="hide-menu">Pertemuan</span>
-                              </a>
-                          </li>
-                            <li class="sidebar-item">
-                              <a class="sidebar-link" href="{{ route('absensi.index') }}" aria-expanded="false">
-                                  <span>
-                                      <i class="ti ti-alert-circle"></i>
-                                  </span>
-                                  <span class="hide-menu">Data Kehadiran</span>
-                              </a>
-                          </li>
-                            <li class="sidebar-item">
-                              <a class="sidebar-link" href="{{ route('validasi.index') }}" aria-expanded="false">
-                                  <span>
-                                      <i class="ti ti-alert-circle"></i>
-                                  </span>
-                                  <span class="hide-menu">Validasi Absen</span>
-                              </a>
-                          </li>
-
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('anggota.index') }}" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-users-group"></i>
+                                        </span>
+                                        <span class="hide-menu">Member Ekstrakurikuler</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('pertemuan.index') }}"
+                                        aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-replace-filled"></i>
+                                        </span>
+                                        <span class="hide-menu">Pertemuan</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('absensi.index') }}" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-alert-circle"></i>
+                                        </span>
+                                        <span class="hide-menu">Data Kehadiran</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('validasi.index') }}" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-copy-check"></i>
+                                         </span>
+                                        <span class="hide-menu">Validasi Absen</span>
+                                    </a>
+                                </li>
                             @endif
                         @endif
-                        
+
                         {{-- <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">UI COMPONENTS</span>
@@ -240,7 +238,7 @@
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3"> {{ Auth::guard('admin')->user()->username }}</p>
                                         </a>
-                                      
+
                                         <a href="{{ route('admin.logout') }}"
                                             class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                                     </div>

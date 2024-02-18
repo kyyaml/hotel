@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ekstrakurikuler;
+use App\Models\Pertemuan;
 use Illuminate\Http\Request;
 
 class LaporanController extends Controller
@@ -12,7 +14,33 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        return view('Admin.Laporan.index');
+        $ekstrakurikuler = Ekstrakurikuler::all();
+        return view('Admin.Laporan.index', ['ekstrakurikuler' => $ekstrakurikuler]);
+    }
+
+    public function pilihLaporan($id_ekstra)
+    {
+        return view('Admin.Laporan.pilihLaporan', ['id_ekstra' => $id_ekstra]);
+    }
+
+    public function laporanKegiatan($id_ekstra)
+    {
+        return view('Admin.Laporan.laporanKegiatan', ['id_ekstra' => $id_ekstra]);
+    }
+
+    public function cariKegiatan(Request $request, $id_ekstra)
+    {
+        // Ambil nilai dari input tanggal pertama dan kedua
+        $start = $request->input('start');
+        $end = $request->input('end');
+
+        // Query untuk mencari pertemuan berdasarkan tanggal dan ID ekstrakurikuler
+        $pertemuan = Pertemuan::where('id_ekstra', $id_ekstra)
+            ->whereBetween('created_at', [$start, $end])
+            ->get();
+
+        // Kirim data pertemuan yang ditemukan ke view
+        return view('Admin.Laporan.laporanKegiatan', ['pertemuan' => $pertemuan,'id_ekstra' => $id_ekstra]);
     }
 
     /**

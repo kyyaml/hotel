@@ -83,7 +83,10 @@ Route::prefix('admin')->group(function () {
             Route::resource('member-ekstra', MemberEkstraController::class);
 
             //Laporan
-            Route::resource('laporan',LaporanController::class);
+            Route::get('/laporan/kegiatan/{id_ekstra}', [LaporanController::class, 'laporanKegiatan'])->name('laporan.kegiatan');
+            Route::get('/laporan/kegiatan/cari/{id_ekstra}', [LaporanController::class, 'cariKegiatan'])->name('laporan.cariKegiatan');
+            Route::get('/laporan/pilih/{id_ekstra}', [LaporanController::class, 'pilihLaporan'])->name('laporan.pilih');
+            Route::resource('laporan', LaporanController::class);
         });
 
         Route::group(['middleware' => ['role:pelatih']], function () {

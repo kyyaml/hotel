@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Modernize Free</title>
-  <link rel="shortcut icon" type="image/png" href="{{ asset('assets/admin/images/logos/favicon.png')}}"/>
+  <title>Ekstrakurikuler</title>
+  <link rel="shortcut icon" type="image/png" href="{{ asset('assets/admin/images/logos/favicons.png') }}" />
   <link rel="stylesheet" href="{{ asset('assets/admin/css/styles.min.css')}}"" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
@@ -23,7 +23,7 @@
             <div class="card mb-0">
               <div class="card-body">
                 <a href="#" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                  <img src="{{ asset('assets/admin/images/logos/dark-logo.svg')}}" width="180" alt="">
+                  <img src="{{ asset('assets/admin/images/logos/siswalogo.png')}}" width="140" alt="">
                 </a>
                 <p class="text-center">Login User</p>
 

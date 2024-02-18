@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Absen</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/admin/favicon.png') }}" />
+    <title>Ekstrakurikuler</title>
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/admin/images/logos/favicons.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/css/styles.min.css') }}" />
 
 </head>
@@ -21,7 +21,8 @@
                     <ul class="navbar-nav">
                         <li class="nav-item d-none d-xl-block">
                             <a href="{{ route('presensi.index') }}" class="text-nowrap nav-link">
-                                <img src="{{ asset('assets/admin/images/logos/dark-logo.svg') }}" class="dark-logo" width="180" alt="">
+                                <img src="{{ asset('assets/admin/images/logos/mainlogo.png')}}" width="160" class="dark-logo" alt="">
+
                             </a>
                         </li>
                         <li class="nav-item d-block d-xl-none">
@@ -29,7 +30,8 @@
                             <i class="ti ti-menu-2"></i>
                         </a> -->
                             <a href="{{ route('presensi.index') }}" class="text-nowrap nav-link">
-                                <img src="{{ asset('assets/admin/images/logos/dark-logo.svg') }}" class="dark-logo" width="180" alt="">
+                                <img src="{{ asset('assets/admin/images/logos/mainlogo.png') }}" class="dark-logo" width="160"
+                                    alt="">
                             </a>
                         </li>
                     </ul>
@@ -38,7 +40,8 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ asset('assets/admin/images/profile/user-1.jpg') }}" alt="" width="35" height="35" class="rounded-circle">
+                                    <img src="{{ asset('assets/admin/images/profile/user-1.jpg') }}" alt=""
+                                        width="35" height="35" class="rounded-circle">
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
@@ -48,7 +51,8 @@
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">{{ Auth::guard('siswa')->user()->nama }}</p>
                                         </a>
-                                        <a href="{{ route('user.logout') }}" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                                        <a href="{{ route('user.logout') }}"
+                                            class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                                     </div>
                                 </div>
                             </li>
@@ -62,11 +66,11 @@
             </div>
         </div>
     </div>
-<script src="{{ asset('assets/admin/libs/jquery/dist/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/admin/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('assets/admin/js/sidebarmenu.js') }}"></script>
-<script src="{{ asset('assets/admin/js/app.min.js') }}"></script>
-<script src="{{ asset('assets/admin/libs/simplebar/dist/simplebar.js') }}"></script>
+    <script src="{{ asset('assets/admin/libs/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/sidebarmenu.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/app.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/libs/simplebar/dist/simplebar.js') }}"></script>
 
 </body>
 
