@@ -82,7 +82,25 @@
                                         <span class="hide-menu">Siswa</span>
                                     </a>
                                 </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('laporan.index') }}"
+                                        aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-user-circle"></i>
+                                        </span>
+                                        <span class="hide-menu">Laporan</span>
+                                    </a>
+                                </li>
                             @else
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="{{ route('anggota.index') }}"
+                                    aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-alert-circle"></i>
+                                    </span>
+                                    <span class="hide-menu">Member Ekstrakurikuler</span>
+                                </a>
+                            </li>
                             <li class="sidebar-item">
                               <a class="sidebar-link" href="{{ route('pertemuan.index') }}" aria-expanded="false">
                                   <span>
@@ -91,6 +109,23 @@
                                   <span class="hide-menu">Pertemuan</span>
                               </a>
                           </li>
+                            <li class="sidebar-item">
+                              <a class="sidebar-link" href="{{ route('absensi.index') }}" aria-expanded="false">
+                                  <span>
+                                      <i class="ti ti-alert-circle"></i>
+                                  </span>
+                                  <span class="hide-menu">Data Kehadiran</span>
+                              </a>
+                          </li>
+                            <li class="sidebar-item">
+                              <a class="sidebar-link" href="{{ route('validasi.index') }}" aria-expanded="false">
+                                  <span>
+                                      <i class="ti ti-alert-circle"></i>
+                                  </span>
+                                  <span class="hide-menu">Validasi Absen</span>
+                              </a>
+                          </li>
+
                             @endif
                         @endif
                         
@@ -205,14 +240,7 @@
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3"> {{ Auth::guard('admin')->user()->username }}</p>
                                         </a>
-                                        {{-- <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-mail fs-6"></i>
-                      <p class="mb-0 fs-3">My Account</p>
-                    </a>
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-list-check fs-6"></i>
-                      <p class="mb-0 fs-3">My Task</p>
-                    </a> --}}
+                                      
                                         <a href="{{ route('admin.logout') }}"
                                             class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                                     </div>

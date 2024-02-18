@@ -17,11 +17,10 @@
                 <h5 class="card-title fw-semibold mb-4 col-md-4">Data Pertemuan</h5>
             </div>
 
-
             @foreach ($pertemuans as $pertemuan)
                 @if ($statusAbsen[$pertemuan->id_pertemuan])
-                    <a href="#">
-                        <div class="card mb-3">
+                    <a href="{{ route('presensi.createAbsen', $pertemuan->id_pertemuan) }}">
+                            <div class="card mb-3">
                             <div class="card-body p-4 d-flex align-items-center gap-3">
                                 <div>
                                     <h5 class="fw-semibold mb-0">{{ $pertemuan->judul_pertemuan }}</h5>
@@ -32,21 +31,19 @@
                         </div>
                     </a>
                 @else
-                <a href="#" style="cursor: default">
-                    <div class="card mb-3">
-                        <div class="card-body p-4 d-flex align-items-center gap-3">
-                            <div>
-                                <h5 class="fw-semibold mb-0">{{ $pertemuan->judul_pertemuan }}</h5>
-                                <span class="fs-3 d-flex align-items-center">{{ $pertemuan->kegiatan }}</span>
+                    <a href="#" style="cursor: default">
+                        <div class="card mb-3">
+                            <div class="card-body p-4 d-flex align-items-center gap-3">
+                                <div>
+                                    <h5 class="fw-semibold mb-0">{{ $pertemuan->judul_pertemuan }}</h5>
+                                    <span class="fs-3 d-flex align-items-center">{{ $pertemuan->kegiatan }}</span>
+                                </div>
+                                <span class="py-1 px-2 ms-auto badge text-bg-danger">Ditutup</span>
                             </div>
-                            <span class="py-1 px-2 ms-auto badge text-bg-danger">Ditutup</span>
                         </div>
-                    </div>
-                </a>
+                    </a>
                 @endif
             @endforeach
-
-
         </div>
     </div>
 @endsection

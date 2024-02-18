@@ -6,8 +6,10 @@ use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Models\Ekstrakurikuler;
 use App\Models\Pertemuan;
+use App\Models\Presensi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PresensiController extends Controller
 {
@@ -55,17 +57,49 @@ class PresensiController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id_pertemuan)
     {
-        //
+        // Mendapatkan informasi pertemuan berdasarkan id
+        $pertemuan = Pertemuan::findOrFail($id_pertemuan);
+
+
+        // Periksa apakah siswa sudah melakukan absensi pada pertemuan ini
+        $siswa = Auth::guard('siswa')->user();
+        $sudahAbsen = Presensi::where('id_pertemuan', $id_pertemuan)
+            ->where('nis', $siswa->nis)
+            ->exists();
+
+        return view('User.Presensi.create', ['pertemuan' => $pertemuan, 'sudahAbsen' => $sudahAbsen]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $id_pertemuan)
     {
-        //
+        $data = $request->all();
+
+        $pertemuan = Pertemuan::findOrFail($id_pertemuan);
+
+        $validate = Validator::make($data, [
+            'keterangan' => 'required',
+        ]);
+
+        if ($validate->fails()) {
+            return redirect()->back()->withInput()->withErrors($validate);
+        }
+
+        $now = Carbon::now()->format('H:i');
+        $nis = Auth::guard('siswa')->user()->nis;
+
+        Presensi::create([
+            'nis' => $nis,
+            'time' => $now,
+            'id_pertemuan' => $id_pertemuan,
+            'keterangan' => $data['keterangan'],
+        ]);
+        
+        return redirect()->back()->with('success', 'Presensi berhasil disimpan.');
     }
 
     /**

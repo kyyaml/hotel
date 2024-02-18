@@ -20,7 +20,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light border-bottom">
                     <ul class="navbar-nav">
                         <li class="nav-item d-none d-xl-block">
-                            <a href="" class="text-nowrap nav-link">
+                            <a href="{{ route('presensi.index') }}" class="text-nowrap nav-link">
                                 <img src="{{ asset('assets/admin/images/logos/dark-logo.svg') }}" class="dark-logo" width="180" alt="">
                             </a>
                         </li>
@@ -28,7 +28,7 @@
                             <!-- <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
                             <i class="ti ti-menu-2"></i>
                         </a> -->
-                            <a href="../horizontal/index.html" class="text-nowrap nav-link">
+                            <a href="{{ route('presensi.index') }}" class="text-nowrap nav-link">
                                 <img src="{{ asset('assets/admin/images/logos/dark-logo.svg') }}" class="dark-logo" width="180" alt="">
                             </a>
                         </li>

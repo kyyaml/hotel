@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,6 +22,8 @@ class Presensi extends Model
         'status'
     ];
 
+    protected $dates = ['time'];
+
 
     public function pertemuan()
     {
@@ -30,6 +33,14 @@ class Presensi extends Model
     public function siswa()
     {
         return $this->belongsTo(Siswa::class, 'nis', 'nis');
+    }
+
+   
+    public function formatTime()
+    {
+        return [
+            'time' => Carbon::parse($this->time)->format('H:i'),
+        ];
     }
 
 }

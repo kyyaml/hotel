@@ -102,6 +102,7 @@ class MemberEkstraController extends Controller
 
         return view('Admin.MemberEkstra.showMember', ['ekstrakurikuler' => $ekstrakurikuler,  'siswa' => $siswa]);
     } 
+    
 
     public function show($id)
     {
