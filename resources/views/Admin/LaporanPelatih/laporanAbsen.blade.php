@@ -8,7 +8,7 @@
         <br />
         Cetak Pdf</a> --}}
         @if (isset($start) && isset($end))
-            <a href="{{ route('laporan.exportKegiatan', ['id_ekstra' => $id_ekstra, 'start' => $start, 'end' => $end]) }}"
+            <a href="{{ route('laporanPelatih.exportAbsen', ['id_ekstra' => $id_ekstra, 'start' => $start, 'end' => $end]) }}"
                 class="btn btn-success mb-3"><img
                     src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg"
                     alt="" width="25" height="25" /><br />
@@ -16,7 +16,7 @@
         @endif
         <div class="row">
             <div class="col-12 col-lg-6 col-md-6 mb-3">
-                <form action="{{ route('laporan.cariKegiatan', $id_ekstra) }}" method="GET">
+                <form action="{{ route('laporanPelatih.cariAbsen') }}" method="GET">
                     <div class="input-daterange input-group" id="date-range">
                         <input type="hidden" name="id_ekstra" value="{{ $id_ekstra }}">
                         <input type="date" class="form-control bg-white" name="start"
@@ -33,7 +33,7 @@
             <div class="col-12 d-flex align-items-stretch">
                 <div class="card w-100">
                     <div class="card-body p-4">
-                        <h5 class="card-title fw-semibold mb-4">Data Kegiatan</h5>
+                        <h5 class="card-title fw-semibold mb-4">Data Absen</h5>
                         <div class="table-responsive">
                             <table class="table text-nowrap mb-0 align-middle">
                                 <thead class="text-dark fs-4">
@@ -42,41 +42,43 @@
                                             <h6 class="fw-semibold mb-0">No</h6>
                                         </th>
                                         <th class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">Judul Pertemuan</h6>
+                                            <h6 class="fw-semibold mb-0">Nama</h6>
                                         </th>
                                         <th class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">Kegiatan</h6>
+                                            <h6 class="fw-semibold mb-0">Jumlah Hadir</h6>
                                         </th>
                                         <th class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">Tanggal</h6>
+                                            <h6 class="fw-semibold mb-0">Jumlah Pertemuan</h6>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (isset($pertemuan))
-                                        @forelse($pertemuan as $index => $item)
+                                    @if (isset($siswa) && isset($jumlahKehadiran) && isset($jumlahPertemuan))
+                                        @forelse($siswa as $index => $student)
                                             <tr>
                                                 <td class="border-bottom-0">
                                                     <p class="mb-0 fw-normal">{{ $index + 1 }}</p>
                                                 </td>
                                                 <td class="border-bottom-0">
-                                                    <p class="mb-0 fw-normal">{{ $item->judul_pertemuan }}</p>
+                                                    <p class="mb-0 fw-normal">{{ $student->nama }}</p>
                                                 </td>
                                                 <td class="border-bottom-0">
-                                                    <p class="mb-0 fw-normal">{{ $item->kegiatan }}</p>
+                                                    <p class="mb-0 fw-normal">
+                                                        {{ isset($jumlahKehadiran[$student->nama]) ? $jumlahKehadiran[$student->nama] : 0 }}
+                                                    </p>
                                                 </td>
                                                 <td class="border-bottom-0">
-                                                    <p class="mb-0 fw-normal">{{ $item->formatDate()['tgl_pertemuan'] }}</p>
+                                                    <p class="mb-0 fw-normal">{{ $jumlahPertemuan }}</p>
                                                 </td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="4" class="text-center">Tidak ada pertemuan ditemukan</td>
+                                                <td colspan="4" class="text-center">Tidak ada Absen ditemukan</td>
                                             </tr>
                                         @endforelse
                                     @else
                                         <tr>
-                                            <td colspan="4" class="text-center">Silakan cari data pertemuan sesuai
+                                            <td colspan="4" class="text-center">Silakan cari data Absen sesuai
                                                 tanggal</td>
                                         </tr>
                                     @endif

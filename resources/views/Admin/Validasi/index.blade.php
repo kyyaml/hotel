@@ -9,9 +9,9 @@
 
 @section('content')
     <div class="container-fluid ">
-        {{-- <div class="row">
+        <div class="row">
             <div class="col-12 col-lg-4 col-md-5 ">
-                <form action="{{ route('pertemuan.search') }}" method="GET">
+                <form action="{{ route('validasi.searchPertemuan') }}" method="GET">
                     <div class="input-group mb-3">
                         <input type="search" name="searchPertemuan" placeholder="cari judul atau kegiatan ..." id="form1"
                             class="form-control bg-white  " />
@@ -20,7 +20,6 @@
             </div>
             </form>
         </div>
-    </div> --}}
         <div class="row">
             <div class="col-12 d-flex align-items-stretch ">
                 <div class="card w-100 ">
@@ -54,37 +53,47 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($pertemuan as $k => $v)
-                                        <tr>
-                                            <td class="border-bottom-0">
-                                                <p class="mb-0 fw-normal">{{ $k += 1 }}</p>
-                                            </td>
-                                            <td class="border-bottom-0">
-                                                <p class="mb-0 fw-normal">{{ $v->judul_pertemuan }}</p>
-                                            </td>
-                                            <td class="border-bottom-0">
-                                                <p class="mb-0 fw-normal"
-                                                    style="max-width: 200px; max-height: 200px; overflow: auto; text-overflow: ellipsis; white-space: normal;">
-                                                    {{ $v->kegiatan }}
-                                                </p>
-                                            </td>
+                                    @if (count($pertemuan) > 0)
+                                        @foreach ($pertemuan as $k => $v)
+                                            <tr>
+                                                <td class="border-bottom-0">
+                                                    <p class="mb-0 fw-normal">{{ $k += 1 }}</p>
+                                                </td>
+                                                <td class="border-bottom-0">
+                                                    <p class="mb-0 fw-normal">{{ $v->judul_pertemuan }}</p>
+                                                </td>
+                                                <td class="border-bottom-0">
+                                                    <p class="mb-0 fw-normal"
+                                                        style="max-width: 200px; max-height: 200px; overflow: auto; text-overflow: ellipsis; white-space: normal;">
+                                                        {{ $v->kegiatan }}
+                                                    </p>
+                                                </td>
 
-                                            <td class="border-bottom-0">
-                                                <p class="mb-0 fw-normal">{{ $v->formatTime()['start_time'] }}</p>
-                                            </td>
-                                            <td class="border-bottom-0">
-                                                <p class="mb-0 fw-normal">{{ $v->formatTime()['end_time'] }}</p>
-                                            </td>
-                                            <td class="border-bottom-0">
-                                                <p class="mb-0 fw-normal">{{ $v->ekstrakurikuler->nama }}</p>
-                                            </td>
-                                            <td class="border-bottom-0">
-                                                <a href="{{ route('validasiAbsen', $v->id_pertemuan) }}" class="text-muted"><u>
-                                                        <p class="mb-0 fw-normal ">Validasi</p>
-                                                    </u></a>
+                                                <td class="border-bottom-0">
+                                                    <p class="mb-0 fw-normal">{{ $v->formatTime()['start_time'] }}</p>
+                                                </td>
+                                                <td class="border-bottom-0">
+                                                    <p class="mb-0 fw-normal">{{ $v->formatTime()['end_time'] }}</p>
+                                                </td>
+                                                <td class="border-bottom-0">
+                                                    <p class="mb-0 fw-normal">{{ $v->ekstrakurikuler->nama }}</p>
+                                                </td>
+                                                <td class="border-bottom-0">
+                                                    <a href="{{ route('validasiAbsen', $v->id_pertemuan) }}"
+                                                        class="text-muted"><u>
+                                                            <p class="mb-0 fw-normal ">Validasi</p>
+                                                        </u></a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="7" class="text-center">
+                                                <p class="mb-0 fw-normal">Tidak Ada Data</p>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @endif
+
                                 </tbody>
                             </table>
                         </div>

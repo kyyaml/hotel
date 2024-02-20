@@ -9,19 +9,19 @@
 
 @section('content')
     <div class="container-fluid ">
-{{--         
+
         <div class="row">
-            <div class="col-12 col-lg-4 col-md-5 ">
+            <div class="col-12 col-lg-4 col-md-5">
                 <form action="{{ route('absensiSiswa', $id_pertemuan) }}" method="GET">
                     <div class="input-group mb-3">
-                        <input type="search" name="search" placeholder="cari nama siswa ..." id="form1"
-                            class="form-control bg-white  " />
+                        <input type="search" name="search" placeholder="Cari nama siswa ..."
+                            class="form-control bg-white" />
                         <button type="submit" class="btn btn-primary"><i class="ti ti-search"></i></button>
                     </div>
+                </form>
             </div>
-            </form>
         </div>
-    </div> --}}
+
 
         <div class="row">
             <div class="col-12 d-flex align-items-stretch ">
@@ -62,14 +62,16 @@
                                                 <td class="border-bottom-0" style="display: flex">
                                                     <form action="{{ route('absensi.store') }}" method="POST">
                                                         @csrf
-                                                        <input type="hidden" name="id_pertemuan" value="{{ $id_pertemuan }}">
+                                                        <input type="hidden" name="id_pertemuan"
+                                                            value="{{ $id_pertemuan }}">
                                                         <input type="hidden" name="nis" value="{{ $v->nis }}">
                                                         <input type="hidden" name="keterangan" value="hadir">
                                                         <button type="submit" class="btn btn-success">Hadir</button>
                                                     </form>
                                                     <form action="{{ route('absensi.store') }}" method="POST">
                                                         @csrf
-                                                        <input type="hidden" name="id_pertemuan" value="{{ $id_pertemuan }}">
+                                                        <input type="hidden" name="id_pertemuan"
+                                                            value="{{ $id_pertemuan }}">
 
                                                         <input type="hidden" name="nis" value="{{ $v->nis }}">
                                                         <input type="hidden" name="keterangan" value="izin">
@@ -81,7 +83,7 @@
                                     @else
                                         <tr>
                                             <td colspan="4" class="text-center">
-                                                <p class="mb-0 fw-normal">Semua siswa telah melakukan presensi.</p>
+                                                <p class="mb-0 fw-normal">Tidak Ada Data</p>
                                             </td>
                                         </tr>
                                     @endif

@@ -1,7 +1,7 @@
 @extends('layouts.user')
 
 @section('content')
-    <div class="row pt-7">
+    {{-- <div class="row pt-7">
         <div class="col-12 col-lg-5 col-md-6 mb-3">
             <form action="#" method="GET">
                 <div class="input-daterange input-group" id="date-range">
@@ -10,7 +10,7 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> --}}
     <div class="card">
         <div class="card-body">
             <div class="d-flex gap-6 mb-3">
@@ -25,8 +25,10 @@
                                 <div>
                                     <h5 class="fw-semibold mb-0">{{ $pertemuan->judul_pertemuan }}</h5>
                                     <span class="fs-3 d-flex align-items-center">{{ $pertemuan->kegiatan }}</span>
+                                    <span class=" mt-2 badge badge-sm text-bg-light">{{ $pertemuan->formatTime()['start_time'] }} - {{ $pertemuan->formatTime()['end_time'] }}</span>
                                 </div>
                                 <span class="py-1 px-2 ms-auto badge text-bg-primary">Dibuka</span>
+                               
                             </div>
                         </div>
                     </a>
@@ -37,6 +39,7 @@
                                 <div>
                                     <h5 class="fw-semibold mb-0">{{ $pertemuan->judul_pertemuan }}</h5>
                                     <span class="fs-3 d-flex align-items-center">{{ $pertemuan->kegiatan }}</span>
+                                    <span class=" mt-2 badge badge-sm text-bg-light">{{ $pertemuan->formatTime()['start_time'] }} - {{ $pertemuan->formatTime()['end_time'] }}</span>
                                 </div>
                                 <span class="py-1 px-2 ms-auto badge text-bg-danger">Ditutup</span>
                             </div>

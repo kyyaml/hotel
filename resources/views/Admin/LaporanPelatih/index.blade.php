@@ -9,7 +9,7 @@
           <p class="card-text">
             Untuk Melihat Laporan Absen
           </p>
-          <a href="{{ route('laporan.absen', $id_ekstra) }}" class="btn btn-primary">Lihat</a>
+          <a href="{{ route('laporanPelatih.absen') }}" class="btn btn-primary">Lihat</a>
         </div>
       </div>
     </div>
@@ -20,7 +20,7 @@
           <p class="card-text">
             Untuk Melihat Laporan  Kegiatan
           </p>
-          <a href="{{ route('laporan.kegiatan', $id_ekstra) }}" class="btn btn-primary">Lihat</a>
+          <a href="{{ route('laporanPelatih.kegiatan') }}" class="btn btn-primary">Lihat</a>
         </div>
       </div>
     </div>

@@ -23,28 +23,28 @@ class MemberEkstraController extends Controller
 
     public function searchDaftarSiswa(Request $request)
     {
-      $id_ekstra = $request->id_ekstra;
-      $search = $request->search;
-    
-      $ekstrakurikuler = Ekstrakurikuler::findOrFail($id_ekstra);
-    
-      $siswa = Siswa::whereDoesntHave('ekstrakurikuler', function ($query) use ($id_ekstra) {
-        $query->where('ekstrakurikuler.id_ekstra', $id_ekstra);
-      })->where('nama', 'like', "%$search%")->get();
-    
-      return view('Admin.MemberEkstra.create', ['ekstrakurikuler' => $ekstrakurikuler, 'id_ekstra' => $id_ekstra, 'siswa' => $siswa]);
+        $id_ekstra = $request->id_ekstra;
+        $search = $request->search;
+
+        $ekstrakurikuler = Ekstrakurikuler::findOrFail($id_ekstra);
+
+        $siswa = Siswa::whereDoesntHave('ekstrakurikuler', function ($query) use ($id_ekstra) {
+            $query->where('ekstrakurikuler.id_ekstra', $id_ekstra);
+        })->where('nama', 'like', "%$search%")->get();
+
+        return view('Admin.MemberEkstra.create', ['ekstrakurikuler' => $ekstrakurikuler, 'id_ekstra' => $id_ekstra, 'siswa' => $siswa]);
     }
 
     public function searchMember(Request $request, $id_ekstra)
-  {
-    $query = $request->get('searchMember');
+    {
+        $query = $request->get('searchMember');
 
-    $ekstrakurikuler = Ekstrakurikuler::findOrFail($id_ekstra);
+        $ekstrakurikuler = Ekstrakurikuler::findOrFail($id_ekstra);
 
-    $siswa = $ekstrakurikuler->siswa()->where('nama', 'like', '%' . $query . '%')->get();
+        $siswa = $ekstrakurikuler->siswa()->where('nama', 'like', '%' . $query . '%')->get();
 
-    return view('Admin.MemberEkstra.showMember', ['ekstrakurikuler' => $ekstrakurikuler, 'siswa' => $siswa]);
-  }
+        return view('Admin.MemberEkstra.showMember', ['ekstrakurikuler' => $ekstrakurikuler, 'siswa' => $siswa]);
+    }
 
 
     /**
@@ -95,18 +95,18 @@ class MemberEkstraController extends Controller
      * Display the specified resource.
      */
 
-    public function showMember($id_ekstra){
-        
+    public function showMember($id_ekstra)
+    {
+
         $ekstrakurikuler = Ekstrakurikuler::findOrFail($id_ekstra);
         $siswa = $ekstrakurikuler->siswa;
 
         return view('Admin.MemberEkstra.showMember', ['ekstrakurikuler' => $ekstrakurikuler,  'siswa' => $siswa]);
-    } 
-    
+    }
+
 
     public function show($id)
     {
-        
     }
 
     /**
@@ -129,20 +129,19 @@ class MemberEkstraController extends Controller
      */
 
 
-public function destroyData($nis, $id_ekstra)
-{
-    // Temukan siswa berdasarkan NIS
-    $siswa = Siswa::where('nis', $nis)->first();
+    public function destroyData($nis, $id_ekstra)
+    {
+        // Temukan siswa berdasarkan NIS
+        $siswa = Siswa::where('nis', $nis)->first();
 
-    if (!$siswa) {
-        return redirect()->back()->with(['message' => 'Siswa tidak ditemukan.', 'type' => 'error']);
+        if (!$siswa) {
+            return redirect()->back()->with(['message' => 'Siswa tidak ditemukan.', 'type' => 'error']);
+        }
+
+        // Hapus anggota ekstrakurikuler dari ekstrakurikuler yang sesuai dengan ID yang diterima
+        $siswa->memberEkstra()->where('id_ekstra', $id_ekstra)->delete();
+
+        // Redirect kembali dengan pesan sukses
+        return redirect()->back()->with(['message' => 'Anggota ekstrakurikuler berhasil dihapus dari ekstrakurikuler yang sesuai.', 'type' => 'success']);
     }
-
-    // Hapus anggota ekstrakurikuler dari ekstrakurikuler yang sesuai dengan ID yang diterima
-    $siswa->memberEkstra()->where('id_ekstra', $id_ekstra)->delete();
-
-    // Redirect kembali dengan pesan sukses
-    return redirect()->back()->with(['message' => 'Anggota ekstrakurikuler berhasil dihapus dari ekstrakurikuler yang sesuai.', 'type' => 'success']);
-}
-
 }

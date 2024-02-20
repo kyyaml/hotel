@@ -9,18 +9,20 @@
 
 @section('content')
     <div class="container-fluid ">
-        {{-- <div class="row">
-            <div class="col-12 col-lg-4 col-md-5 ">
-                <form action="{{ route('pertemuan.search') }}" method="GET">
+
+        <div class="row">
+            <div class="col-12 col-lg-4 col-md-5">
+                <form action="{{ route('validasiAbsen', $id_pertemuan) }}" method="GET">
                     <div class="input-group mb-3">
-                        <input type="search" name="searchPertemuan" placeholder="cari judul atau kegiatan ..." id="form1"
-                            class="form-control bg-white  " />
+                        <input type="search" name="search" placeholder="Cari nama siswa..." id="search"
+                            class="form-control bg-white" />
                         <button type="submit" class="btn btn-primary"><i class="ti ti-search"></i></button>
                     </div>
+                </form>
             </div>
-            </form>
         </div>
-    </div> --}}
+
+
         @if (session('success'))
             <div class="row">
                 <div class="col-12 col-lg-6">
@@ -92,7 +94,9 @@
                                                         method="POST">
                                                         @csrf
                                                         @method('PUT')
-                                                        <button type="submit" class="btn btn-danger mx-2">Tolak</button>
+                                                        <button type="submit"
+                                                            onclick="return confirm('Apakah Anda yakin ingin menolak?')"
+                                                            class="btn btn-danger mx-2">Tolak</button>
                                                     </form>
                                                 </td>
 
@@ -101,7 +105,7 @@
                                     @else
                                         <tr>
                                             <td colspan="6" class="text-center">
-                                                <p class="mb-0 fw-normal ">Semua Presensi  Telah Divalidasi</p>
+                                                <p class="mb-0 fw-normal ">Tidak Ada Data</p>
                                             </td>
                                         </tr>
                                     @endif

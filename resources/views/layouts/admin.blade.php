@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ekstrakurikuler</title>
     @yield('css')
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/admin/images/logos/favicons.png') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/admin/images/logos/fav.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/css/styles.min.css') }}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
@@ -20,10 +20,9 @@
         <aside class="left-sidebar">
             <!-- Sidebar scroll-->
             <div>
-                <div class="brand-logo d-flex align-items-center justify-content-between">
+                <div class="brand-logo d-flex align-items-center justify-content-between border-bottom">
                     <a href="#" class="text-nowrap logo-img">
-                        <img src="{{ asset('assets/admin/images/logos/mainlogo.png')}}" width="160" alt="">
-
+                        <img src="{{ asset('assets/admin/images/logos/mainlogo.png')}}" width="180" alt="">
                     </a>
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                         <i class="ti ti-x fs-8"></i>
@@ -32,11 +31,11 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
                     <ul id="sidebarnav">
-                        <li class="nav-small-cap">
+                        {{-- <li class="nav-small-cap">
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu">Home</span>
-                        </li>
-                        <li class="sidebar-item">
+                        </li> --}}
+                        <li class="sidebar-item mt-2">
                             <a class="sidebar-link" href="{{ route('dashboard.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-layout-dashboard"></i>
@@ -111,7 +110,7 @@
                                 <li class="sidebar-item">
                                     <a class="sidebar-link" href="{{ route('absensi.index') }}" aria-expanded="false">
                                         <span>
-                                            <i class="ti ti-alert-circle"></i>
+                                            <i class="ti ti-browser-check   "></i>
                                         </span>
                                         <span class="hide-menu">Data Kehadiran</span>
                                     </a>
@@ -122,6 +121,14 @@
                                             <i class="ti ti-copy-check"></i>
                                          </span>
                                         <span class="hide-menu">Validasi Absen</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="{{ route('laporanPelatih.index') }}" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-report-analytics"></i>
+                                        </span>
+                                        <span class="hide-menu">Laporan</span>
                                     </a>
                                 </li>
                             @endif

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AnggotaEkstraController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EkstrakurikulerController;
 use App\Http\Controllers\Admin\LaporanController;
+use App\Http\Controllers\Admin\LaporanPelatihController;
 use App\Http\Controllers\Admin\MemberEkstraController;
 use App\Http\Controllers\Admin\PelatihController;
 use App\Http\Controllers\Admin\PertemuanController;
@@ -83,8 +84,16 @@ Route::prefix('admin')->group(function () {
             Route::resource('member-ekstra', MemberEkstraController::class);
 
             //Laporan
+            //kegiatan
+            Route::get('/laporan/kegiatan/export/{id_ekstra}/{start}/{end}', [LaporanController::class, 'exportKegiatan'])->name('laporan.exportKegiatan');
             Route::get('/laporan/kegiatan/{id_ekstra}', [LaporanController::class, 'laporanKegiatan'])->name('laporan.kegiatan');
             Route::get('/laporan/kegiatan/cari/{id_ekstra}', [LaporanController::class, 'cariKegiatan'])->name('laporan.cariKegiatan');
+
+            //absen
+            Route::get('/laporan/absen/export/{id_ekstra}/{start}/{end}', [LaporanController::class, 'exportAbsen'])->name('laporan.exportAbsen');
+            Route::get('/laporan/absen/cari/{id_ekstra}', [LaporanController::class, 'cariAbsen'])->name('laporan.cariAbsen');
+            Route::get('/laporan/absen/{id_ekstra}', [LaporanController::class, 'laporanAbsen'])->name('laporan.absen');
+
             Route::get('/laporan/pilih/{id_ekstra}', [LaporanController::class, 'pilihLaporan'])->name('laporan.pilih');
             Route::resource('laporan', LaporanController::class);
         });
@@ -101,6 +110,7 @@ Route::prefix('admin')->group(function () {
             route::resource('anggota', AnggotaEkstraController::class);
 
             //Validasi
+            Route::get('/validasi/searchPertemuan', [ValidasiController::class, 'searchPertemuan'])->name('validasi.searchPertemuan');
             Route::get('/validasi/{id_pertemuan}', [ValidasiController::class, 'validasi'])->name('validasiAbsen');
             Route::put('/validasi/terima/{id_presensi}', [ValidasiController::class, 'terima'])->name('validasi.terima');
             Route::put('/validasi/tolak/{id_presensi}', [ValidasiController::class, 'tolak'])->name('validasi.tolak');
@@ -112,6 +122,19 @@ Route::prefix('admin')->group(function () {
             Route::get('/absensiSiswa/{id_pertemuan}', [AbsensiController::class, 'presensi'])->name('absensiSiswa');
             Route::get('/showKehadiran/{id_pertemuan}', [AbsensiController::class, 'showKehadiran'])->name('showKehadiran');
             Route::resource('absensi', AbsensiController::class);
+
+            //absen
+            Route::get('/laporanPelatih/absen/export/{id_ekstra}/{start}/{end}', [LaporanPelatihController::class, 'exportLaporanAbsen'])->name('laporanPelatih.exportAbsen');
+            Route::get('/laporanPelatih/absen',[LaporanPelatihController::class,'laporanAbsen'])->name('laporanPelatih.absen');
+            Route::get('/laporanPelatih/absen/cari',[LaporanPelatihController::class,'cariAbsen'])->name('laporanPelatih.cariAbsen');
+
+            //kegiatan
+            Route::get('/laporanPelatih/kegiatan/export/{id_ekstra}/{start}/{end}', [LaporanPelatihController::class, 'exportLaporanKegiatan'])->name('laporanPelatih.exportKegiatan');
+            Route::get('/laporanPelatih/kegiatan',[LaporanPelatihController::class,'laporanKegiatan'])->name('laporanPelatih.kegiatan');
+            Route::get('/laporanPelatih/kegiatan/cari',[LaporanPelatihController::class,'cariKegiatan'])->name('laporanPelatih.cariKegiatan');
+            
+            
+            Route::resource('laporanPelatih',LaporanPelatihController::class);
         });
 
         // Logout (accessible to both roles)

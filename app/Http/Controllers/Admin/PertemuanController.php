@@ -46,8 +46,10 @@ class PertemuanController extends Controller
         // Jika keyword pencarian tidak kosong, lakukan pencarian
         if (!empty($keyword)) {
             // Lakukan pencarian berdasarkan judul atau kegiatan
-            $query->where('judul_pertemuan', 'like', "%$keyword%")
-                ->orWhere('kegiatan', 'like', "%$keyword%");
+            $query->where(function ($query) use ($keyword) {
+                $query->where('judul_pertemuan', 'like', "%$keyword%")
+                      ->orWhere('kegiatan', 'like', "%$keyword%");
+            });
         }
     }
 
@@ -100,6 +102,7 @@ class PertemuanController extends Controller
         $pertemuan = Pertemuan::create([
             'judul_pertemuan' => $data['judul_pertemuan'],
             'kegiatan' => $data['kegiatan'],
+            'tgl_pertemuan' => date('Y-m-d h:i:s'),
             'start_time' => $start_time,
             'end_time' => $end_time,
             'id_ekstra' => $id_ekstra,

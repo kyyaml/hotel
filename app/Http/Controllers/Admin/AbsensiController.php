@@ -47,8 +47,10 @@ class AbsensiController extends Controller
             // Jika keyword pencarian tidak kosong, lakukan pencarian
             if (!empty($keyword)) {
                 // Lakukan pencarian berdasarkan judul atau kegiatan
-                $query->where('judul_pertemuan', 'like', "%$keyword%")
-                    ->orWhere('kegiatan', 'like', "%$keyword%");
+                $query->where(function ($query) use ($keyword) {
+                    $query->where('judul_pertemuan', 'like', "%$keyword%")
+                          ->orWhere('kegiatan', 'like', "%$keyword%");
+                });
             }
         }
 
@@ -108,7 +110,7 @@ class AbsensiController extends Controller
         return view('Admin.Absensi.showKehadiran', ['presensi' => $presensi, 'id_pertemuan' => $id_pertemuan]);
     }
 
-    public function presensi($id_pertemuan)
+    public function presensi(Request $request, $id_pertemuan)
     {
         // Mendapatkan data pertemuan yang dipilih
         $pertemuan = Pertemuan::findOrFail($id_pertemuan);
@@ -128,9 +130,24 @@ class AbsensiController extends Controller
         // Mendapatkan data siswa yang belum absen
         $siswa = $siswa_terdaftar->whereNotIn('nis', $presensi_siswa);
 
+        if ($request->has('search')) {
+            // Ambil keyword pencarian
+            $keyword = $request->input('search');
+            
+            // Jika keyword pencarian tidak kosong, lakukan pencarian
+            if (!empty($keyword)) {
+                // Lakukan pencarian berdasarkan nama siswa
+                $siswa = $siswa->filter(function ($item) use ($keyword) {
+                    return false !== stristr($item->nama, $keyword);
+                });
+            }
+        }
+        
+
         // Kirim data siswa yang belum absen ke view presensi
         return view('Admin.Absensi.presensi', ['siswa' => $siswa,'id_pertemuan' => $id_pertemuan]);
     }
+
 
 
     /**
@@ -161,12 +178,17 @@ class AbsensiController extends Controller
 
         $now = Carbon::now()->format('H:i');
 
+        $pertemuan = Pertemuan::where('id_pertemuan',$data['id_pertemuan'])->first();
+
+        $created_at = $pertemuan->created_at;
+
         Presensi::create([
             'id_pertemuan' => $data['id_pertemuan'],
             'nis' => $data['nis'],
             'time' => $now,
             'keterangan' => $data['keterangan'],
             'status' => 'diterima',
+            'created_at' => $created_at
         ]);
 
         return redirect()->back()->with('success', 'Presensi berhasil disimpan.');

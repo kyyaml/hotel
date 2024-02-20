@@ -21,9 +21,7 @@
                                     <div class="mb-3">
                                         <p class="">{{ $pertemuan->kegiatan }}</p>
                                     </div>
-                                    <span
-                                        class="mb-7 badge badge-sm text-bg-light">{{ $pertemuan->formatTime()['start_time'] }}
-                                        - {{ $pertemuan->formatTime()['end_time'] }}</span>
+                                    <span class="mb-7 badge badge-sm text-bg-light">{{ $pertemuan->formatTime()['start_time'] }} - {{ $pertemuan->formatTime()['end_time'] }}</span>
                                     <input type="hidden" name="keterangan" value="hadir">
                                     <button type="submit" class="btn btn-success w-100">Masuk</button>
                                 </form>

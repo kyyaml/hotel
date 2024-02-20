@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ekstrakurikuler</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/admin/images/logos/favicons.png') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/admin/images/logos/fav.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/css/styles.min.css') }}" />
 
 </head>
@@ -21,8 +21,7 @@
                     <ul class="navbar-nav">
                         <li class="nav-item d-none d-xl-block">
                             <a href="{{ route('presensi.index') }}" class="text-nowrap nav-link">
-                                <img src="{{ asset('assets/admin/images/logos/mainlogo.png')}}" width="160" class="dark-logo" alt="">
-
+                                <img src="{{ asset('assets/admin/images/logos/mainlogo.png')}}" width="180" class="dark-logo" alt="">
                             </a>
                         </li>
                         <li class="nav-item d-block d-xl-none">
@@ -30,7 +29,7 @@
                             <i class="ti ti-menu-2"></i>
                         </a> -->
                             <a href="{{ route('presensi.index') }}" class="text-nowrap nav-link">
-                                <img src="{{ asset('assets/admin/images/logos/mainlogo.png') }}" class="dark-logo" width="160"
+                                <img src="{{ asset('assets/admin/images/logos/mainlogo.png') }}" class="dark-logo" width="180"
                                     alt="">
                             </a>
                         </li>

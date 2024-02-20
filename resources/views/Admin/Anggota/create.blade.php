@@ -1,9 +1,10 @@
 @extends('layouts.admin')
 
 
-@section('title', 'Ekstrakurikuler')
 
 @section('header')
+    <a href="{{ route('anggota.index') }}" class="nav-link fs-4 text-primary d-none d-lg-block">Data Member ekstrakurikuler</a>
+    <span class="nav-link fs-4 mx-2 d-none d-lg-block">/</span>
     <a href="#" class="nav-link fs-4 d-none d-lg-block">Siswa Belum Terdaftar</a>
 @endsection
 

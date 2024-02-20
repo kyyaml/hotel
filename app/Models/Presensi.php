@@ -19,10 +19,12 @@ class Presensi extends Model
         'nis',
         'time',
         'keterangan',
-        'status'
+        'status',
+        'created_at'
     ];
 
     protected $dates = ['time'];
+    public $timestamps = false;
 
 
     public function pertemuan()

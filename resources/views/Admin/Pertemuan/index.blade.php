@@ -55,37 +55,46 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if (count($pertemuan)>0)
                                 @foreach ($pertemuan as $k => $v)
-                                    <tr>
-                                        <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal">{{ $k += 1 }}</p>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal">{{ $v->judul_pertemuan }}</p>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal"
-                                                style="max-width: 200px; max-height: 200px; overflow: auto; text-overflow: ellipsis; white-space: normal;">
-                                                {{ $v->kegiatan }}
-                                            </p>
-                                        </td>
+                                <tr>
+                                    <td class="border-bottom-0">
+                                        <p class="mb-0 fw-normal">{{ $k += 1 }}</p>
+                                    </td>
+                                    <td class="border-bottom-0">
+                                        <p class="mb-0 fw-normal">{{ $v->judul_pertemuan }}</p>
+                                    </td>
+                                    <td class="border-bottom-0">
+                                        <p class="mb-0 fw-normal"
+                                            style="max-width: 200px; max-height: 200px; overflow: auto; text-overflow: ellipsis; white-space: normal;">
+                                            {{ $v->kegiatan }}
+                                        </p>
+                                    </td>
 
-                                        <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal">{{ $v->formatTime()['start_time'] }}</p>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal">{{ $v->formatTime()['end_time'] }}</p>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal">{{ $v->ekstrakurikuler->nama }}</p>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <a href="{{ route('pertemuan.edit', $v->id_pertemuan) }}" class="text-muted"><u>
-                                                    <p class="mb-0 fw-normal ">Lihat</p>
-                                                </u></a>
+                                    <td class="border-bottom-0">
+                                        <p class="mb-0 fw-normal">{{ $v->formatTime()['start_time'] }}</p>
+                                    </td>
+                                    <td class="border-bottom-0">
+                                        <p class="mb-0 fw-normal">{{ $v->formatTime()['end_time'] }}</p>
+                                    </td>
+                                    <td class="border-bottom-0">
+                                        <p class="mb-0 fw-normal">{{ $v->ekstrakurikuler->nama }}</p>
+                                    </td>
+                                    <td class="border-bottom-0">
+                                        <a href="{{ route('pertemuan.edit', $v->id_pertemuan) }}" class="text-muted"><u>
+                                                <p class="mb-0 fw-normal ">Lihat</p>
+                                            </u></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="7" class="text-center">
+                                            <p class="mb-0 fw-normal">Tidak Ada DAta</p>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @endif
+                                
                             </tbody>
                         </table>
                     </div>

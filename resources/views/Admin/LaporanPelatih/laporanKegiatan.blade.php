@@ -8,7 +8,7 @@
         <br />
         Cetak Pdf</a> --}}
         @if (isset($start) && isset($end))
-            <a href="{{ route('laporan.exportKegiatan', ['id_ekstra' => $id_ekstra, 'start' => $start, 'end' => $end]) }}"
+            <a href="{{ route('laporanPelatih.exportKegiatan', ['id_ekstra' => $id_ekstra, 'start' => $start, 'end' => $end]) }}"
                 class="btn btn-success mb-3"><img
                     src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg"
                     alt="" width="25" height="25" /><br />
@@ -16,7 +16,7 @@
         @endif
         <div class="row">
             <div class="col-12 col-lg-6 col-md-6 mb-3">
-                <form action="{{ route('laporan.cariKegiatan', $id_ekstra) }}" method="GET">
+                <form action="{{ route('laporanPelatih.cariKegiatan') }}" method="GET">
                     <div class="input-daterange input-group" id="date-range">
                         <input type="hidden" name="id_ekstra" value="{{ $id_ekstra }}">
                         <input type="date" class="form-control bg-white" name="start"
