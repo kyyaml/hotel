@@ -7,12 +7,8 @@
 
 @section('content')
 
-<div class=" text-center mt-2">
-    <h4>Selamat Datang {{ Auth::guard('admin')->user()->nama }}</h4>
-    <img src="{{ asset('assets/admin/images/logos/dashboard.svg') }}" alt="" style="width: 40%; opacity: 70%">       
-</div>
-
-        {{-- <div class="row">
+=
+        <div class="row">
 
 
         <div class="col-12 col-md-6 col-lg-4">
@@ -64,5 +60,5 @@
             </div>
         </div>
 
-    </div> --}}
+    </div>
 @endsection

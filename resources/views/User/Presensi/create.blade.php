@@ -10,7 +10,10 @@
                         <div class="card-body">
                             @if ($sudahAbsen)
                                 <div class="card-title text-center">
-                                    Anda telah mengirim data
+                                    Anda telah melakukan presensi
+                                </div>
+                                <div class="text-center mb-0">
+                                    <a class="btn btn-success mt-4 w-50" href="{{ route('presensi.index') }}">Selesai</a>
                                 </div>
                             @else
                                 <form action="{{ route('presensi.storeAbsen', $pertemuan->id_pertemuan) }}" method="POST">
@@ -21,7 +24,9 @@
                                     <div class="mb-3">
                                         <p class="">{{ $pertemuan->kegiatan }}</p>
                                     </div>
-                                    <span class="mb-7 badge badge-sm text-bg-light">{{ $pertemuan->formatTime()['start_time'] }} - {{ $pertemuan->formatTime()['end_time'] }}</span>
+                                    <span
+                                        class="mb-7 badge badge-sm text-bg-light">{{ $pertemuan->formatTime()['start_time'] }}
+                                        - {{ $pertemuan->formatTime()['end_time'] }}</span>
                                     <input type="hidden" name="keterangan" value="hadir">
                                     <button type="submit" class="btn btn-success w-100">Masuk</button>
                                 </form>
@@ -31,8 +36,9 @@
                                     <input type="hidden" name="keterangan" value="izin">
                                     <button type="submit" class="btn btn-warning mt-2 w-100">Izin</button>
                                 </form>
-                                <a class="btn btn-danger mt-2 w-100" href="{{ route('show.absen', $pertemuan->id_ekstra) }}" >Kembali</a>
-                                @endif
+                                <a class="btn btn-danger mt-2 w-100"
+                                    href="{{ route('show.absen', $pertemuan->id_ekstra) }}">Kembali</a>
+                            @endif
                         </div>
                     </div>
                 </div>

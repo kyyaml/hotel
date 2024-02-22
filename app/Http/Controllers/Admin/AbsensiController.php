@@ -21,9 +21,16 @@ class AbsensiController extends Controller
 
         $id_pelatih = Auth::guard('admin')->user()->id_pelatih;
 
-        $ekstrakurikuler = Ekstrakurikuler::where('id_pelatih', $id_pelatih)->pluck('id_ekstra');
+        $ekstrakurikuler = Ekstrakurikuler::where('id_pelatih', $id_pelatih)->first();
 
-        $pertemuan = Pertemuan::whereIn('id_ekstra', $ekstrakurikuler)->latest()->get();
+        if (!$ekstrakurikuler) {
+            // Jika ekstrakurikuler tidak ditemukan, gunakan abort
+            abort(403);
+        }
+
+        $id_ekstra = $ekstrakurikuler->id_ekstra;
+
+        $pertemuan = Pertemuan::where('id_ekstra', $id_ekstra)->latest()->get();
 
         return view('Admin.Absensi.index', ['pertemuan' => $pertemuan]);
     }
@@ -49,7 +56,7 @@ class AbsensiController extends Controller
                 // Lakukan pencarian berdasarkan judul atau kegiatan
                 $query->where(function ($query) use ($keyword) {
                     $query->where('judul_pertemuan', 'like', "%$keyword%")
-                          ->orWhere('kegiatan', 'like', "%$keyword%");
+                        ->orWhere('kegiatan', 'like', "%$keyword%");
                 });
             }
         }
@@ -133,7 +140,7 @@ class AbsensiController extends Controller
         if ($request->has('search')) {
             // Ambil keyword pencarian
             $keyword = $request->input('search');
-            
+
             // Jika keyword pencarian tidak kosong, lakukan pencarian
             if (!empty($keyword)) {
                 // Lakukan pencarian berdasarkan nama siswa
@@ -142,10 +149,10 @@ class AbsensiController extends Controller
                 });
             }
         }
-        
+
 
         // Kirim data siswa yang belum absen ke view presensi
-        return view('Admin.Absensi.presensi', ['siswa' => $siswa,'id_pertemuan' => $id_pertemuan]);
+        return view('Admin.Absensi.presensi', ['siswa' => $siswa, 'id_pertemuan' => $id_pertemuan]);
     }
 
 
@@ -178,7 +185,7 @@ class AbsensiController extends Controller
 
         $now = Carbon::now()->format('H:i');
 
-        $pertemuan = Pertemuan::where('id_pertemuan',$data['id_pertemuan'])->first();
+        $pertemuan = Pertemuan::where('id_pertemuan', $data['id_pertemuan'])->first();
 
         $created_at = $pertemuan->created_at;
 

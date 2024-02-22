@@ -22,6 +22,15 @@ class LaporanPelatihController extends Controller
      */
     public function index()
     {
+        $id_pelatih = Auth::guard('admin')->user()->id_pelatih;
+
+        $ekstrakurikuler = Ekstrakurikuler::where('id_pelatih', $id_pelatih)->first();
+
+        if (!$ekstrakurikuler) {
+            // Jika ekstrakurikuler tidak ditemukan, gunakan abort
+            abort(403);
+        }
+
         return view('Admin.LaporanPelatih.index');
     }
 

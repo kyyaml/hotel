@@ -22,7 +22,7 @@
             <div>
                 <div class="brand-logo d-flex align-items-center justify-content-between border-bottom">
                     <a href="#" class="text-nowrap logo-img">
-                        <img src="{{ asset('assets/admin/images/logos/mainlogo.png')}}" width="180" alt="">
+                        <img src="{{ asset('assets/admin/images/logos/mainlogo.png') }}" width="180" alt="">
                     </a>
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                         <i class="ti ti-x fs-8"></i>
@@ -35,18 +35,20 @@
                             <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                             <span class="hide-menu">Home</span>
                         </li> --}}
-                        <li class="sidebar-item mt-2">
-                            <a class="sidebar-link" href="{{ route('dashboard.index') }}" aria-expanded="false">
-                                <span>
-                                    <i class="ti ti-layout-dashboard"></i>
-                                </span>
-                                <span class="hide-menu">Dashboard</span>
-                            </a>
-                        </li>
+
 
                         @if (Auth::guard('admin')->check())
                             {{-- Show these items only for admin --}}
                             @if (Auth::guard('admin')->user()->role == 'kesiswaan')
+                                <li class="sidebar-item mt-2">
+                                    <a class="sidebar-link" href="{{ route('dashboard.kesiswaan') }}"
+                                        aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-layout-dashboard"></i>
+                                        </span>
+                                        <span class="hide-menu">Dashboard</span>
+                                    </a>
+                                </li>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link" href="{{ route('pelatih.index') }}" aria-expanded="false">
                                         <span>
@@ -90,6 +92,14 @@
                                     </a>
                                 </li>
                             @else
+                                <li class="sidebar-item mt-2">
+                                    <a class="sidebar-link" href="{{ route('dashboard.pelatih') }}" aria-expanded="false">
+                                        <span>
+                                            <i class="ti ti-layout-dashboard"></i>
+                                        </span>
+                                        <span class="hide-menu">Dashboard</span>
+                                    </a>
+                                </li>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link" href="{{ route('anggota.index') }}" aria-expanded="false">
                                         <span>
@@ -119,12 +129,13 @@
                                     <a class="sidebar-link" href="{{ route('validasi.index') }}" aria-expanded="false">
                                         <span>
                                             <i class="ti ti-copy-check"></i>
-                                         </span>
+                                        </span>
                                         <span class="hide-menu">Validasi Absen</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{ route('laporanPelatih.index') }}" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('laporanPelatih.index') }}"
+                                        aria-expanded="false">
                                         <span>
                                             <i class="ti ti-report-analytics"></i>
                                         </span>

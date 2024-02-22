@@ -76,32 +76,33 @@ class PresensiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $id_pertemuan)
-    {
-        $data = $request->all();
+        public function store(Request $request, $id_pertemuan)
+        {
+            $data = $request->all();
 
-        $pertemuan = Pertemuan::findOrFail($id_pertemuan);
+            $pertemuan = Pertemuan::findOrFail($id_pertemuan);
 
-        $validate = Validator::make($data, [
-            'keterangan' => 'required',
-        ]);
+            $validate = Validator::make($data, [
+                'keterangan' => 'required',
+            ]);
 
-        if ($validate->fails()) {
-            return redirect()->back()->withInput()->withErrors($validate);
+            if ($validate->fails()) {
+                return redirect()->back()->withInput()->withErrors($validate);
+            }
+
+            $now = Carbon::now();
+            $nis = Auth::guard('siswa')->user()->nis;
+
+            Presensi::create([
+                'nis' => $nis,
+                'time' => $now,
+                'created_at'=>$now,
+                'id_pertemuan' => $id_pertemuan,
+                'keterangan' => $data['keterangan'],
+            ]);
+            
+            return redirect()->back()->with('success', 'Presensi berhasil disimpan.');
         }
-
-        $now = Carbon::now()->format('H:i');
-        $nis = Auth::guard('siswa')->user()->nis;
-
-        Presensi::create([
-            'nis' => $nis,
-            'time' => $now,
-            'id_pertemuan' => $id_pertemuan,
-            'keterangan' => $data['keterangan'],
-        ]);
-        
-        return redirect()->back()->with('success', 'Presensi berhasil disimpan.');
-    }
 
     /**
      * Display the specified resource.

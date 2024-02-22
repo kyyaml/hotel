@@ -18,9 +18,16 @@ class ValidasiController extends Controller
     {
         $id_pelatih = Auth::guard('admin')->user()->id_pelatih;
 
-        $ekstrakurikuler = Ekstrakurikuler::where('id_pelatih', $id_pelatih)->pluck('id_ekstra');
+        $ekstrakurikuler = Ekstrakurikuler::where('id_pelatih', $id_pelatih)->first();
 
-        $pertemuan = Pertemuan::whereIn('id_ekstra', $ekstrakurikuler)->latest()->get();
+        if (!$ekstrakurikuler) {
+            // Jika ekstrakurikuler tidak ditemukan, gunakan abort
+            abort(403);
+        }
+
+        $id_ekstra = $ekstrakurikuler->id_ekstra;
+
+        $pertemuan = Pertemuan::where('id_ekstra',$id_ekstra)->latest()->get();
 
         return view('Admin.Validasi.index', ['pertemuan' => $pertemuan]);
     }
@@ -39,7 +46,6 @@ class ValidasiController extends Controller
             abort(403, 'Anda tidak memiliki akses ke pertemuan ini.');
         }
 
-        // Mendapatkan data presensi yang memiliki status "proses" dan terkait dengan pertemuan yang diklik
         // Mendapatkan data presensi yang memiliki status "proses" dan terkait dengan pertemuan yang diklik
         $query = Presensi::where('id_pertemuan', $id_pertemuan)
             ->where('status', 'proses');

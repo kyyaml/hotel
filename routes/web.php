@@ -30,6 +30,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 //user
+
+
+
 Route::get('/', [UserController::class, 'index'])->name('user.index');
 
 Route::middleware(['guest'])->group(function () {
@@ -59,10 +62,13 @@ Route::prefix('admin')->group(function () {
     Route::middleware(['auth:admin'])->group(function () {
 
         // Common dashboard for both roles
-        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    
 
         // Role-specific routes:
         Route::group(['middleware' => ['role:kesiswaan']], function () {
+
+            Route::get('/dashboard',[DashboardController::class, 'kesiswaan'])->name('dashboard.kesiswaan');
+
             // Pelatih Management
             Route::resource('pelatih', PelatihController::class);
             Route::get('/searchPelatih', [PelatihController::class, 'searchPelatih'])->name('pelatih.search');
@@ -99,6 +105,9 @@ Route::prefix('admin')->group(function () {
         });
 
         Route::group(['middleware' => ['role:pelatih']], function () {
+
+            Route::get('dashboard/pelatih',[DashboardController::class, 'pelatih'])->name('dashboard.pelatih');
+
             // Pertemuan Management
             Route::resource('pertemuan', PertemuanController::class);
             Route::get('/searchPertemuan', [PertemuanController::class, 'searchPertemuan'])->name('pertemuan.search');

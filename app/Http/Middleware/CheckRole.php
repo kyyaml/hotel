@@ -24,7 +24,8 @@ class CheckRole
     }
 
     // Jika role tidak sesuai, Anda dapat mengarahkan pengguna ke halaman lain atau memberikan respons sesuai kebutuhan.
-    return redirect()->route('admin.formLogin')->with('error', 'Unauthorized.');
+    return abort(403);
+
 
     }
 }

@@ -90,7 +90,7 @@
                                 @else
                                     <tr>
                                         <td colspan="7" class="text-center">
-                                            <p class="mb-0 fw-normal">Tidak Ada DAta</p>
+                                            <p class="mb-0 fw-normal">Tidak Ada Data</p>
                                         </td>
                                     </tr>
                                 @endif
