@@ -15,23 +15,23 @@ class PertemuanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $id_pelatih = Auth::guard('admin')->user()->id_pelatih;
+        public function index()
+        {
+            $id_pelatih = Auth::guard('admin')->user()->id_pelatih;
 
-        $ekstrakurikuler = Ekstrakurikuler::where('id_pelatih', $id_pelatih)->first();
+            $ekstrakurikuler = Ekstrakurikuler::where('id_pelatih', $id_pelatih)->first();
 
-        if (!$ekstrakurikuler) {
-            // Jika ekstrakurikuler tidak ditemukan, gunakan abort
-            abort(403);
+            if (!$ekstrakurikuler) {
+                // Jika ekstrakurikuler tidak ditemukan, gunakan abort
+                abort(403);
+            }
+
+            $id_ekstra = $ekstrakurikuler->id_ekstra;
+
+            $pertemuan = Pertemuan::where('id_ekstra',$id_ekstra)->latest()->get();
+
+            return view('Admin.Pertemuan.index', ['pertemuan' => $pertemuan]);
         }
-
-        $id_ekstra = $ekstrakurikuler->id_ekstra;
-
-        $pertemuan = Pertemuan::where('id_ekstra',$id_ekstra)->latest()->get();
-
-        return view('Admin.Pertemuan.index', ['pertemuan' => $pertemuan]);
-    }
 
     
     public function searchPertemuan(Request $request)

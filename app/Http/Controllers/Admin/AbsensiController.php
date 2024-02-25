@@ -200,6 +200,8 @@ class AbsensiController extends Controller
 
         return redirect()->back()->with('success', 'Presensi berhasil disimpan.');
     }
+    
+
 
     /**
      * Display the specified resource.

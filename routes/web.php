@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\MemberEkstraController;
 use App\Http\Controllers\Admin\PelatihController;
 use App\Http\Controllers\Admin\PertemuanController;
 use App\Http\Controllers\Admin\SiswaController;
+use App\Http\Controllers\Admin\TesController;
 use App\Http\Controllers\Admin\ValidasiController;
 use App\Http\Controllers\User\PresensiController;
 use App\Http\Controllers\User\UserController;
@@ -119,6 +120,7 @@ Route::prefix('admin')->group(function () {
             route::resource('anggota', AnggotaEkstraController::class);
 
             //Validasi
+            Route::post('/validasi/terimaSemua/{id_pertemuan}', [ValidasiController::class, 'terimaSemua'])->name('validasi.terimaSemua');
             Route::get('/validasi/searchPertemuan', [ValidasiController::class, 'searchPertemuan'])->name('validasi.searchPertemuan');
             Route::get('/validasi/{id_pertemuan}', [ValidasiController::class, 'validasi'])->name('validasiAbsen');
             Route::put('/validasi/terima/{id_presensi}', [ValidasiController::class, 'terima'])->name('validasi.terima');
@@ -143,7 +145,9 @@ Route::prefix('admin')->group(function () {
             Route::get('/laporanPelatih/kegiatan/cari',[LaporanPelatihController::class,'cariKegiatan'])->name('laporanPelatih.cariKegiatan');
             
             
+            
             Route::resource('laporanPelatih',LaporanPelatihController::class);
+
         });
 
         // Logout (accessible to both roles)

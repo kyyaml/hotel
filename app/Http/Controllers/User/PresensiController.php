@@ -70,7 +70,11 @@ class PresensiController extends Controller
             ->where('nis', $siswa->nis)
             ->exists();
 
-        return view('User.Presensi.create', ['pertemuan' => $pertemuan, 'sudahAbsen' => $sudahAbsen]);
+            $validasi = Presensi::where('id_pertemuan', $id_pertemuan)
+            ->where('nis', $siswa->nis)
+            ->first();
+
+        return view('User.Presensi.create', ['pertemuan' => $pertemuan, 'sudahAbsen' => $sudahAbsen, 'validasi'=>$validasi]);
     }
 
     /**

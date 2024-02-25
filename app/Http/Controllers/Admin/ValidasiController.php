@@ -25,6 +25,7 @@ class ValidasiController extends Controller
             abort(403);
         }
 
+       
         $id_ekstra = $ekstrakurikuler->id_ekstra;
 
         $pertemuan = Pertemuan::where('id_ekstra',$id_ekstra)->latest()->get();
@@ -130,6 +131,23 @@ class ValidasiController extends Controller
         $pertemuan = $query->latest()->get();
 
         return view('Admin.Validasi.index', ['pertemuan' => $pertemuan]);
+    }
+
+
+    public function terimaSemua(Request $request, $id_pertemuan)
+    {
+        // Temukan semua presensi yang belum diterima untuk pertemuan tertentu
+        $presensiBelumDiterima = Presensi::where('id_pertemuan', $id_pertemuan)
+            ->where('status', 'proses')
+            ->get();
+
+        // Ubah status presensi menjadi "diterima" untuk semua presensi yang belum diterima
+        foreach ($presensiBelumDiterima as $presensi) {
+            $presensi->update(['status' => 'diterima']);
+        }
+
+        // Redirect atau kembali ke halaman sebelumnya
+        return redirect()->back()->with('success', 'Semua presensi berhasil diterima.');
     }
 
     public function create()

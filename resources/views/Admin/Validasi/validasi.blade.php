@@ -38,7 +38,16 @@
             <div class="col-12 d-flex align-items-stretch ">
                 <div class="card w-100 ">
                     <div class="card-body p-4">
-                        <h5 class="card-title fw-semibold mb-4">Validasi Absen</h5>
+                        <div class=" d-flex justify-content-between align-items-center ">
+                            <h5 class="card-title fw-semibold mb-4 ">Validasi Absen</h5>
+                            @if (count($presensi) > 0)
+                            <form action="{{ route('validasi.terimaSemua', $id_pertemuan) }}" method="POST">
+                                @csrf
+                                <button id="acceptAll" type="submit" class="btn btn-success mb-2 me-2">Terima Semua</button>
+                            </form>
+                            @endif
+                        </div>
+                        
                         <div class="table-responsive">
                             <table class="table text-nowrap mb-0 align-middle">
                                 <thead class="text-dark fs-4">

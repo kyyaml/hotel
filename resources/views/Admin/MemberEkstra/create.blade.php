@@ -3,9 +3,9 @@
 @section('header')
     <a class="nav-link fs-4 text-primary d-none d-lg-block" href="{{ route('member-ekstra.index') }}">Member Ekstrakurikuler</a>
     <span class="nav-link fs-4 mx-2 d-none d-lg-block">/</span>
-    <a class="nav-link fs-4 text-primary d-none d-lg-block" href="{{ route('member-ekstra.showMember', $ekstrakurikuler->id_ekstra) }}">Data Member Ekstrakurikuler {{ $ekstrakurikuler->nama }}</a>
+    <a class="nav-link fs-4 text-primary d-none d-lg-block" href="{{ route('member-ekstra.showMember', $ekstrakurikuler->id_ekstra) }}">Data Member Ekstrakurikuler</a>
     <span class="nav-link fs-4 mx-2 d-none d-lg-block">/</span>
-    <a href="" class="nav-link fs-4 d-none d-lg-block">Tambah Member Ekstrakurikuler {{ $ekstrakurikuler->nama }}</a>
+    <a href="" class="nav-link fs-4 d-none d-lg-block">Tambah Member Ekstrakurikuler </a>
 @endsection
 
 

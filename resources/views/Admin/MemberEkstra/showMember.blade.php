@@ -3,7 +3,7 @@
 @section('header')
     <a class="nav-link fs-4 text-primary d-none d-lg-block" href="{{ route('member-ekstra.index') }}">Member Ekstra</a>
     <span class="nav-link fs-4 mx-2 d-none d-lg-block">/</span>
-    <a href="#" class="nav-link fs-4 d-none d-lg-block">Data Member Ekstrakurikuler {{ $ekstrakurikuler->nama }}</a>
+    <a href="#" class="nav-link fs-4 d-none d-lg-block">Data Member Ekstrakurikulerk</a>
 @endsection
 
 @section('content')

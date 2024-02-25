@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 
-@section('title', 'Ekstrakurikuler')
 
 @section('header')
     <a href="#" class="nav-link fs-4 d-none d-lg-block">Data Pertemuan</a>
@@ -55,9 +54,21 @@
                                 <tbody>
                                     @if (count($pertemuan) > 0)
                                         @foreach ($pertemuan as $k => $v)
+                                            @php
+                                                $belumValid = $v->presensi->where('status', '=', 'proses')->count() > 0;
+                                            @endphp
                                             <tr>
                                                 <td class="border-bottom-0">
-                                                    <p class="mb-0 fw-normal">{{ $k += 1 }}</p>
+                                                    @php
+                                                        $belumValid = $v->presensi->where('status', '=', 'proses')->count();
+                                                    @endphp
+                                                    @if ($belumValid > 0)
+                                                        <span class="badge bg-danger rounded-pill ms-2 position-absolute" style="padding: .2em .4em; font-size: .65em; line-height: 1; cursor:default;">
+                                                            {{ $belumValid }}
+                                                        </span>
+                                                    @endif
+                                                    <p class="mb-0  fw-normal">{{ $k += 1 }}</p>
+                                                    
                                                 </td>
                                                 <td class="border-bottom-0">
                                                     <p class="mb-0 fw-normal">{{ $v->judul_pertemuan }}</p>

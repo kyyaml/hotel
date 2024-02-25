@@ -7,6 +7,8 @@
     <title>Ekstrakurikuler</title>
     @yield('css')
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/admin/images/logos/fav.png') }}" />
+
+
     <link rel="stylesheet" href="{{ asset('assets/admin/css/styles.min.css') }}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
@@ -93,7 +95,8 @@
                                 </li>
                             @else
                                 <li class="sidebar-item mt-2">
-                                    <a class="sidebar-link" href="{{ route('dashboard.pelatih') }}" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('dashboard.pelatih') }}"
+                                        aria-expanded="false">
                                         <span>
                                             <i class="ti ti-layout-dashboard"></i>
                                         </span>
@@ -126,7 +129,8 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{{ route('validasi.index') }}" aria-expanded="false">
+                                    <a class="sidebar-link" href="{{ route('validasi.index') }}"
+                                        aria-expanded="false">
                                         <span>
                                             <i class="ti ti-copy-check"></i>
                                         </span>
@@ -274,6 +278,11 @@
         </div>
     </div>
     @yield('js')
+    <script>
+        $(document).ready(function() {
+            $('#file_export').DataTable();
+        });
+    </script>
     <script src="{{ asset('assets/admin/libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/admin/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/sidebarmenu.js') }}"></script>
@@ -281,6 +290,7 @@
     <script src="{{ asset('assets/admin/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/admin/libs/simplebar/dist/simplebar.js') }}"></script>
     <script src="{{ asset('assets/admin/js/dashboard.js') }}"></script>
+    
 </body>
 
 </html>
