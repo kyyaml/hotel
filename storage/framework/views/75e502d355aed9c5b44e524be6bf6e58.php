@@ -1,16 +1,12 @@
-@extends('layouts.admin')
-
-
-
-@section('header')
+<?php $__env->startSection('header'); ?>
     <a href="#" class="nav-link fs-4 d-none d-lg-block">Data Pertemuan</a>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="container-fluid ">
         <div class="row">
             <div class="col-12 col-lg-4 col-md-5 ">
-                <form action="{{ route('validasi.searchPertemuan') }}" method="GET">
+                <form action="<?php echo e(route('validasi.searchPertemuan')); ?>" method="GET">
                     <div class="input-group mb-3">
                         <input type="search" name="searchPertemuan" placeholder="cari judul atau kegiatan ..." id="form1"
                             class="form-control bg-white  " />
@@ -52,58 +48,60 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (count($pertemuan) > 0)
-                                        @foreach ($pertemuan as $k => $v)
-                                            @php
+                                    <?php if(count($pertemuan) > 0): ?>
+                                        <?php $__currentLoopData = $pertemuan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k => $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php
                                                 $belumValid = $v->presensi->where('status', '=', 'proses')->count() > 0;
-                                            @endphp
+                                            ?>
                                             <tr>
                                                 <td class="border-bottom-0 position-relative">
-                                                    @php
+                                                    <?php
                                                         $belumValid = $v->presensi->where('status', '=', 'proses')->count();
-                                                    @endphp
-                                                    @if ($belumValid > 0)
+                                                    ?>
+                                                    <?php if($belumValid > 0): ?>
                                                         <span class="badge rounded-pill bottom-50  position-absolute" style=" margin-left: .4rem; padding: .25em .45em; font-size: .65em; line-height: 1; cursor:default; background: 	#FF4433">
-                                                            {{ $belumValid }}
+                                                            <?php echo e($belumValid); ?>
+
                                                         </span>
-                                                    @endif
-                                                    <p class="mb-0  fw-normal">{{ $k += 1 }}</p>
+                                                    <?php endif; ?>
+                                                    <p class="mb-0  fw-normal"><?php echo e($k += 1); ?></p>
                                                     
                                                 </td>
                                                 <td class="border-bottom-0">
-                                                    <p class="mb-0 fw-normal">{{ $v->judul_pertemuan }}</p>
+                                                    <p class="mb-0 fw-normal"><?php echo e($v->judul_pertemuan); ?></p>
                                                 </td>
                                                 <td class="border-bottom-0">
                                                     <p class="mb-0 fw-normal"
                                                         style="max-width: 200px; max-height: 200px; overflow: auto; text-overflow: ellipsis; white-space: normal;">
-                                                        {{ $v->kegiatan }}
+                                                        <?php echo e($v->kegiatan); ?>
+
                                                     </p>
                                                 </td>
 
                                                 <td class="border-bottom-0">
-                                                    <p class="mb-0 fw-normal">{{ $v->formatTime()['start_time'] }}</p>
+                                                    <p class="mb-0 fw-normal"><?php echo e($v->formatTime()['start_time']); ?></p>
                                                 </td>
                                                 <td class="border-bottom-0">
-                                                    <p class="mb-0 fw-normal">{{ $v->formatTime()['end_time'] }}</p>
+                                                    <p class="mb-0 fw-normal"><?php echo e($v->formatTime()['end_time']); ?></p>
                                                 </td>
                                                 <td class="border-bottom-0">
-                                                    <p class="mb-0 fw-normal">{{ $v->ekstrakurikuler->nama }}</p>
+                                                    <p class="mb-0 fw-normal"><?php echo e($v->ekstrakurikuler->nama); ?></p>
                                                 </td>
                                                 <td class="border-bottom-0">
-                                                    <a href="{{ route('validasiAbsen', $v->id_pertemuan) }}"
+                                                    <a href="<?php echo e(route('validasiAbsen', $v->id_pertemuan)); ?>"
                                                         class="text-muted"><u>
                                                             <p class="mb-0 fw-normal ">Validasi</p>
                                                         </u></a>
                                                 </td>
                                             </tr>
-                                        @endforeach
-                                    @else
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php else: ?>
                                         <tr>
                                             <td colspan="7" class="text-center">
                                                 <p class="mb-0 fw-normal">Tidak Ada Data</p>
                                             </td>
                                         </tr>
-                                    @endif
+                                    <?php endif; ?>
 
                                 </tbody>
                             </table>
@@ -113,4 +111,6 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\final_projek\ekstra\resources\views/Admin/Validasi/index.blade.php ENDPATH**/ ?>
